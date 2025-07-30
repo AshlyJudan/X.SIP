@@ -3,343 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surabhi Institute of Pytha CAD</title>
+    <title>Pytha Modeller Pack Details - Surabhi Institute</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Using a common serif font as Nexa Serif is not freely available via CDN -->
+    <!-- Google Fonts - Georgia -->
     <link href="https://fonts.googleapis.com/css2?family=Georgia&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Georgia', serif; /* Changed font to Georgia, with generic serif fallback */
-            background-color: #1a202c; /* Dark background for the body - equivalent to gray-900 */
+            font-family: 'Georgia', serif;
+            background-color: #1a202c; /* Dark background */
+            color: #e2e8f0; /* Light gray text */
+            line-height: 1.6;
         }
-        /* Optional: Add smooth scroll behavior for the entire document for fallback */
-        html {
-            scroll-behavior: smooth;
-        }
-        /* Header styles for positioning the canvas */
-        header {
-            position: relative; /* Crucial for absolute positioning of the canvas child */
-            overflow: hidden; /* Ensures shapes don't go outside the header bounds */
-        }
-        #logoCanvas {
-            position: absolute; /* Position over the entire header area */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0; /* Place it behind the text and navigation */
-            /* Removed background-color and border-radius as per new requirement */
-        }
-        /* Ensure the main content of the header (title, nav) appears above the canvas */
-        .header-content-container {
-            position: relative; /* Gives it a z-index context */
-            z-index: 1; /* Higher z-index than the canvas */
-            display: flex; /* Make it a flex container */
-            flex-direction: column; /* Default to column for small screens */
-            justify-content: space-between; /* Space out title and nav */
-            align-items: center; /* Center items vertically */
-            width: 100%; /* Ensure it spans the container */
-        }
-        /* For medium and larger screens, make it a row and align items */
-        @media (min-width: 640px) { /* Tailwind's sm breakpoint */
-            .header-content-container {
-                flex-direction: row; /* Change to row for larger screens */
-            }
+        .container {
+            max-width: 800px;
         }
     </style>
 </head>
 <body class="text-gray-100">
-    <!-- Header Section -->
-    <header class="bg-black text-yellow-400 shadow-lg py-6 px-4 sm:px-6 lg:px-8 rounded-b-lg">
-        <!-- Canvas for animated sketch drawing, now full-size and behind content -->
-        <canvas id="logoCanvas"></canvas>
+    <div class="container mx-auto p-8 bg-gray-800 shadow-lg rounded-lg my-12">
+        <h1 class="text-4xl font-bold text-yellow-400 mb-6">Pytha Modeller Pack (Advanced)</h1>
 
-        <div class="container mx-auto header-content-container">
-            <!-- Title with "Surabhi" in big letters and "Institution of PYTHA CAD" as title -->
-            <!-- Adjusted text sizes for responsiveness and removed pl-4 for mobile centering -->
-            <h1 class="font-bold mb-2 sm:mb-0 text-center sm:text-left">
-                <span class="text-4xl sm:text-5xl block leading-none">Surabhi</span>
-                <span class="text-base sm:text-xl block leading-none">Institute of PYTHA CAD</span>
-            </h1>
-            <nav>
-                <ul class="flex space-x-6">
-                    <li><a href="#about" class="hover:text-yellow-200 transition duration-300">About Us</a></li>
-                    <li><a href="#courses" class="hover:text-yellow-200 transition duration-300">Courses</a></li>
-                    <li><a href="#contact" class="hover:text-yellow-200 transition duration-300">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+        <p class="text-lg mb-6">
+            The Pytha Modeller Pack (Advanced) is our most comprehensive training program, designed for aspiring professionals who aim to master 3D CAD modeling, rendering, and production planning with the powerful PYTHA software. This course provides an in-depth understanding of PYTHA's advanced functionalities, preparing you for complex design and manufacturing challenges.
+        </p>
 
-    <!-- Hero Section -->
-    <section class="relative bg-gray-800 py-20 px-4 sm:px-6 lg:px-8 shadow-md rounded-lg mx-4 mt-8">
-        <div class="container mx-auto text-center">
-            <!-- Adjusted text sizes for responsiveness -->
-            <h2 class="text-3xl sm:text-5xl font-extrabold text-yellow-400 mb-6">Empowering Your Design Future</h2>
-            <p class="text-lg sm:text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-                Whether you're designing beautiful spaces or crafting them with precision, PYTHA helps you bring ideas to life. Easy to learn and powerful to use, it's the perfect tool to connect creativity with hands-on work.
-            </p>
-            <a href="#courses" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
-                Explore Our Courses
+        <h2 class="text-3xl font-semibold text-yellow-400 mb-4">Course Modules:</h2>
+        <ul class="list-disc list-inside text-lg mb-8 space-y-2">
+            <li><strong class="text-yellow-300 hover:text-yellow-600 transition duration-50">Understanding UI:</strong> <span class="hover:text-yellow-400 transition duration-50">Navigate and customize the PYTHA user interface efficiently.</span></li>
+            <li><strong class="text-yellow-300 hover:text-yellow-600 transition duration-50">3D Modelling:</strong> <span class="hover:text-yellow-400 transition duration-50">Learn fundamental and advanced techniques for creating intricate 3D models.</span></li>
+            <li><strong class="text-yellow-300 hover:text-yellow-600 transition duration-50">Advanced 3D Modelling:</strong> <span class="hover:text-yellow-400 transition duration-50">Explore complex modeling tools and methodologies for sophisticated designs.</span></li>
+            <li><strong class="text-yellow-300 hover:text-yellow-600 transition duration-50">Library & Parametrics:</strong> <span class="hover:text-yellow-400 transition duration-50">Utilize and create parametric libraries for efficient and reusable components.</span></li>
+            <li><strong class="text-yellow-300 hover:text-yellow-600 transition duration-50">Model Rendering:</strong> <span class="hover:text-yellow-400 transition duration-50">Produce high-quality, photorealistic renderings of your designs.</span></li>
+            <li><strong class="text-yellow-300 hover:text-yellow-600 transition duration-50">Parts List:</strong> <span class="hover:text-yellow-400 transition duration-50">Generate accurate and detailed parts lists for manufacturing.</span></li>
+            <li><strong class="text-yellow-300 hover:text-yellow-600 transition duration-50">Quotations:</strong> <span class="hover:text-yellow-400 transition duration-50">Learn to create precise quotations directly from your models.</span></li>
+            <li><strong class="text-yellow-300 hover:text-yellow-600 transition duration-50">2D drawing:</strong> <span class="hover:text-yellow-400 transition duration-50">Develop detailed 2D production drawings from 3D models.</span></li>
+            <li><strong class="text-yellow-300 hover:text-yellow-600 transition duration-50">Bore Holes:</strong> <span class="hover:text-yellow-400 transition duration-50">Master the creation and management of bore holes for joinery and hardware.</span></li>
+            <li><strong class="text-yellow-300 hover:text-yellow-600 transition duration-50">Technical Details:</strong> <span class="hover:text-yellow-400 transition duration-50">Understand and apply technical specifications and annotations.</span></li>
+            <li><strong class="text-yellow-300 hover:text-yellow-600 transition duration-50">Optimisation and Labelling:</strong> <span class="hover:text-yellow-400 transition duration-50">Optimize material usage and generate labels for efficient production.</span></li>
+            <li><strong class="text-yellow-300 hover:text-yellow-600 transition duration-50">Cam Interface:</strong> <span class="hover:text-yellow-400 transition duration-50">Integrate with CAM systems for automated manufacturing processes.</span></li>
+            <li><strong class="text-yellow-300 hover:text-yellow-600 transition duration-50">Beam Saw Integration:</strong> <span class="hover:text-yellow-400 transition duration-50">Prepare models for direct output to beam saw machines.</span></li>
+            <li><strong class="text-yellow-300 hover:text-yellow-600 transition duration-50">CNC Machine Integration:</strong> <span class="hover:text-yellow-400 transition duration-50">Seamlessly connect your designs to CNC machinery for automated fabrication.</span></li>
+        </ul>
+
+        <h2 class="text-3xl font-semibold text-yellow-400 mb-10">Course Fees:</h2>
+        <p class="text-3xl font-bold text-gray-100 mb-8">
+            ₹ 50000
+        </p>
+
+        <p class="text-lg mb-6">
+            This pack is ideal for those looking to achieve a high level of proficiency in PYTHA, enabling them to handle all aspects of design, presentation, and production planning.
+        </p>
+
+        <div class="text-center mt-8">
+            <a href="index.html" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+                Back to Main Page
             </a>
         </div>
-    </section>
-
-    <!-- About Us Section -->
-    <section id="about" class="py-16 px-4 sm:px-6 lg:px-8">
-        <div class="container mx-auto text-center">
-            <!-- Adjusted text sizes for responsiveness -->
-            <h3 class="text-3xl sm:text-4xl font-bold text-yellow-400 mb-10">About Surabhi Institute</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div class="text-left">
-                    <p class="text-base sm:text-lg text-gray-300 leading-relaxed mb-6">
-                        Surabhi Institute of PYTHA CAD is a premier training center dedicated to empowering aspiring designers and professionals with cutting-edge skills in 3D CAD using PYTHA software. Backed by Surabhi Decor, a leading name in interior design and manufacturing, our institute blends real-world industry experience with expert-led training to ensure students gain both technical proficiency and practical insight.
-                    </p>
-                    <p class="text-base sm:text-lg text-gray-300 leading-relaxed">
-                        Our mission is to bridge the gap between education and industry by providing hands-on, project-based learning, mentorship from experienced professionals, and placement assistance. Whether you're a student, architect, designer, or entrepreneur, we help you unlock your creative potential and build a successful career in 3D design with PYTHA CAD.
-                    </p>
-                </div>
-                <div class="flex justify-center">
-                    <!-- Placeholder Image for About Us -->
-                    <img src="https://placehold.co/600x400/333333/FFD700?text=About+Us" alt="About Surabhi Institute" class="rounded-lg shadow-xl w-full max-w-md">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Courses Section -->
-    <section id="courses" class="bg-gray-900 py-16 px-4 sm:px-6 lg:px-8 rounded-lg mx-4">
-        <div class="container mx-auto text-center">
-            <!-- Adjusted text sizes for responsiveness -->
-            <h3 class="text-3xl sm:text-4xl font-bold text-yellow-400 mb-12">Our Core Courses</h3>
-            <!-- Changed grid classes for centering -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center">
-                <!-- Course Card 1: Pytha Modeller Pack (Advanced) -->
-                <div class="bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 flex flex-col">
-                    <h4 class="text-xl sm:text-2xl font-semibold text-yellow-400 mb-4">Pytha Modeller Pack (Advanced)</h4>
-                    <ul class="text-left text-gray-300 list-disc list-inside mb-6 flex-grow">
-                        <li>Understanding UI</li>
-                        <li>3D Modelling</li>
-                        <li>Advanced 3D Modelling</li>
-                        <li>Library & Parametrics</li>
-                        <li>Model Rendering</li>
-                        <li>Parts List</li>
-                        <li>Quotations</li>
-                        <li>2D drawing</li>
-                        <li>Bore Holes</li>
-                        <li>Technical Details</li>
-                        <li>Optimisation and Labelling</li>
-                        <li>Cam Interface</li>
-                        <li>Beam Saw Integration</li>
-                        <li>CNC Machine Integration</li>
-                    </ul>
-                    <a href="pytha-modeller-pack.html" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-full shadow-md transition duration-300 mt-auto">Learn More</a>
-                </div>
-
-                <!-- Course Card 2: Pytha Planner Pack (Limited) -->
-                <div class="bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 flex flex-col">
-                    <h4 class="text-xl sm:text-2xl font-semibold text-yellow-400 mb-4">Pytha Planner Pack (Limited)</h4>
-                    <ul class="text-left text-gray-300 list-disc list-inside mb-6 flex-grow">
-                        <li>Understanding UI</li>
-                        <li>Drag N Drop</li>
-                        <li>Parts List</li>
-                        <li>Technical Details</li>
-                        <li>Rendering</li>
-                    </ul>
-                    <a href="pytha-planner-pack.html" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-full shadow-md transition duration-300 mt-auto">Learn More</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 px-4 sm:px-6 lg:px-8">
-        <div class="container mx-auto text-center">
-            <!-- Adjusted text sizes for responsiveness -->
-            <h3 class="text-3xl sm:text-4xl font-bold text-yellow-400 mb-10">Get in Touch</h3>
-            <div class="max-w-2xl mx-auto bg-gray-800 p-8 rounded-xl shadow-lg">
-                <p class="text-base sm:text-lg text-gray-300 mb-6">
-                    Have questions or ready to enroll? Contact us today!
-                </p>
-                <form class="space-y-6">
-                    <div>
-                        <label for="name" class="block text-left text-gray-300 text-sm font-medium mb-2">Name</label>
-                        <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="Your Name" required>
-                    </div>
-                    <div>
-                        <label for="email" class="block text-left text-gray-300 text-sm font-medium mb-2">Email</label>
-                        <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="your@example.com" required>
-                    </div>
-                    <div>
-                        <label for="message" class="block text-left text-gray-300 text-sm font-medium mb-2">Message</label>
-                        <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="Your message..." required></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-6 rounded-md shadow-lg transition duration-300 transform hover:scale-105">
-                        Send Message
-                    </button>
-                </form>
-                <div class="mt-8 text-gray-300">
-                    <p><strong>Address:</strong> [Your Institute Address Here]</p>
-                    <p><strong>Phone:</strong> [Your Phone Number Here]</p>
-                    <p><strong>Email:</strong> info@surabhiinstitute.com</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer Section -->
-    <footer class="bg-gray-900 text-yellow-400 py-8 px-4 sm:px-6 lg:px-8 mt-12 rounded-t-lg">
-        <div class="container mx-auto text-center">
-            <p>&copy; 2025 Surabhi Institute of Pytha CAD. All rights reserved.</p>
-            <div class="flex justify-center space-x-6 mt-4">
-                <a href="#" class="hover:text-yellow-200 transition duration-300">Privacy Policy</a>
-                <a href="#" class="hover:text-yellow-200 transition duration-300">Terms of Service</a>
-            </div>
-        </div>
-    </footer >
-
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Canvas animation for the header background
-        window.onload = function() {
-            const canvas = document.getElementById('logoCanvas');
-            const ctx = canvas.getContext('2d');
-
-            // Set canvas dimensions to match the header
-            function setCanvasDimensions() {
-                canvas.width = canvas.offsetWidth;
-                canvas.height = canvas.offsetHeight;
-            }
-            setCanvasDimensions(); // Set initially
-
-            // Define shapes: triangle, square, circle
-            const shapes = [];
-            const numShapes = 4; // Number of each shape
-
-            // Function to generate a random shape
-            function createRandomShape(type) {
-                return {
-                    type: type,
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    size: Math.random() * 15 + 10, // Random size between 10 and 25
-                    vx: (Math.random() - 0.5) * 2, // Random velocity between -1 and 1
-                    vy: (Math.random() - 0.5) * 2  // Random velocity between -1 and 1
-                };
-            }
-
-            // Populate the shapes array
-            for (let i = 0; i < numShapes; i++) {
-                shapes.push(createRandomShape('triangle'));
-                shapes.push(createRandomShape('square'));
-                shapes.push(createRandomShape('circle'));
-            }
-
-            // Set drawing style for "white pen" sketch
-            ctx.strokeStyle = '#FFFFFF'; // White color
-            ctx.lineWidth = 1; // Thin line for sketch effect
-
-            function drawShape(shape) {
-                ctx.beginPath();
-                if (shape.type === 'triangle') {
-                    const h = shape.size * (Math.sqrt(3) / 2);
-                    ctx.moveTo(shape.x, shape.y - h / 2);
-                    ctx.lineTo(shape.x - shape.size / 2, shape.y + h / 2);
-                    ctx.lineTo(shape.x + shape.size / 2, shape.y + h / 2);
-                    ctx.closePath();
-                } else if (shape.type === 'square') {
-                    ctx.rect(shape.x - shape.size / 2, shape.y - shape.size / 2, shape.size, shape.size);
-                } else if (shape.type === 'circle') {
-                    ctx.arc(shape.x, shape.y, shape.size, 0, Math.PI * 2);
-                }
-                ctx.stroke();
-            }
-
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                shapes.forEach(shape => {
-                    // Update position
-                    shape.x += shape.vx;
-                    shape.y += shape.vy;
-
-                    // Boundary collision detection and repositioning
-                    if (shape.type === 'circle') {
-                        if (shape.x + shape.size > canvas.width) {
-                            shape.x = canvas.width - shape.size;
-                            shape.vx *= -1;
-                        } else if (shape.x - shape.size < 0) {
-                            shape.x = shape.size;
-                            shape.vx *= -1;
-                        }
-                        if (shape.y + shape.size > canvas.height) {
-                            shape.y = canvas.height - shape.size;
-                            shape.vy *= -1;
-                        } else if (shape.y - shape.size < 0) {
-                            shape.y = shape.size;
-                            shape.vy *= -1;
-                        }
-                    } else if (shape.type === 'square') {
-                        if (shape.x + shape.size / 2 > canvas.width) {
-                            shape.x = canvas.width - shape.size / 2;
-                            shape.vx *= -1;
-                        } else if (shape.x - shape.size / 2 < 0) {
-                            shape.x = shape.size / 2;
-                            shape.vx *= -1;
-                        }
-                        if (shape.y + shape.size / 2 > canvas.height) {
-                            shape.y = canvas.height - shape.size / 2;
-                            shape.vy *= -1;
-                        } else if (shape.y - shape.size / 2 < 0) {
-                            shape.y = shape.size / 2;
-                            shape.vy *= -1;
-                        }
-                    } else if (shape.type === 'triangle') {
-                        const h = shape.size * (Math.sqrt(3) / 2);
-                        if (shape.x + shape.size / 2 > canvas.width) {
-                            shape.x = canvas.width - shape.size / 2;
-                            shape.vx *= -1;
-                        } else if (shape.x - shape.size / 2 < 0) {
-                            shape.x = shape.size / 2;
-                            shape.vx *= -1;
-                        }
-                        if (shape.y + h / 2 > canvas.height) {
-                            shape.y = canvas.height - h / 2;
-                            shape.vy *= -1;
-                        } else if (shape.y - h / 2 < 0) {
-                            shape.y = h / 2;
-                            shape.vy *= -1;
-                        }
-                    }
-                    drawShape(shape);
-                });
-                requestAnimationFrame(animate);
-            }
-            animate();
-
-            // Add a resize listener to update canvas dimensions and redraw
-            window.addEventListener('resize', () => {
-                const canvas = document.getElementById('logoCanvas');
-                if (canvas) {
-                    canvas.width = canvas.offsetWidth;
-                    canvas.height = canvas.offsetHeight;
-                }
-            });
-        };
-    </script>
+    </div>
 </body>
 </html>
