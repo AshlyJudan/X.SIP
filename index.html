@@ -300,7 +300,8 @@
                             shape.y = canvas.height - shape.size / 2;
                             shape.vy *= -1;
                         } else if (shape.y - shape.size / 2 < 0) {
-                            shape.y = canvas.size / 2;
+                            // FIX: Changed canvas.size to shape.size
+                            shape.y = shape.size / 2;
                             shape.vy *= -1;
                         }
                     } else if (shape.type === 'triangle') {
