@@ -47,6 +47,57 @@
                 flex-direction: row; /* Change to row for larger screens */
             }
         }
+
+        /* Modal specific styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+            padding: 20px; /* Add some padding around the modal content */
+        }
+
+        .modal-content {
+            background-color: #1f2937; /* Gray-800 equivalent */
+            margin: auto;
+            padding: 30px;
+            border-radius: 0.75rem; /* rounded-xl */
+            width: 90%; /* Responsive width */
+            max-width: 600px; /* Max width for larger screens */
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+            position: relative;
+            animation: fadeIn 0.3s ease-out; /* Simple fade-in animation */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body class="text-gray-100">
@@ -102,7 +153,7 @@
                 </div>
                 <div class="flex justify-center">
                     <!-- Image for About Us section - Replaced placeholder with a relevant image URL -->
-                    <img src="data:image/png;base64,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">
+                    <img src="https://placehold.co/600x400/374151/ffffff?text=Surabhi+Institute" alt="Surabhi Institute Building">
                 </div>
             </div>
         </div>
@@ -134,7 +185,10 @@
                         <li>Beam Saw Integration</li>
                         <li>CNC Machine Integration</li>
                     </ul>
-                    <a href="pytha-modeller-pack.html" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-full shadow-md transition duration-300 mt-auto">Learn More</a>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mt-auto">
+                        <a href="pytha-modeller-pack.html" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-full shadow-md transition duration-300">Learn More</a>
+                        <button type="button" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-full shadow-md transition duration-300" onclick="openApplicationForm('Pytha Modeller Pack (Advanced)')">Apply Now</button>
+                    </div>
                 </div>
 
                 <!-- Course Card 2: Pytha Planner Pack (Limited) -->
@@ -147,7 +201,10 @@
                         <li>Technical Details</li>
                         <li>Rendering</li>
                     </ul>
-                    <a href="pytha-planner-pack.html" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-full shadow-md transition duration-300 mt-auto">Learn More</a>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mt-auto">
+                        <a href="pytha-planner-pack.html" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-full shadow-md transition duration-300">Learn More</a>
+                        <button type="button" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-full shadow-md transition duration-300" onclick="openApplicationForm('Pytha Planner Pack (Limited)')">Apply Now</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -201,6 +258,73 @@
             </div>
         </div>
     </footer >
+
+    <!-- Application Form Modal -->
+    <div id="applicationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeApplicationForm()">&times;</span>
+            <h3 class="text-2xl sm:text-3xl font-bold text-yellow-400 mb-6 text-center">Course Application Form</h3>
+            <form class="space-y-4" id="applicationForm">
+                <div>
+                    <label for="appName" class="block text-left text-gray-300 text-sm font-medium mb-2">Full Name</label>
+                    <input type="text" id="appName" name="appName" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="Your Full Name" required>
+                </div>
+                <div>
+                    <label for="appEmail" class="block text-left text-gray-300 text-sm font-medium mb-2">Email</label>
+                    <input type="email" id="appEmail" name="appEmail" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="your@example.com" required>
+                </div>
+                <div class="flex space-x-2">
+                    <div class="w-1/3">
+                        <label for="appCountryCode" class="block text-left text-gray-300 text-sm font-medium mb-2">Code</label>
+                        <select id="appCountryCode" name="appCountryCode" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100">
+                            <option value="+91" selected>+91 (India)</option>
+                            <option value="+1">+1 (USA/Canada)</option>
+                            <option value="+44">+44 (UK)</option>
+                            <option value="+61">+61 (Australia)</option>
+                            <option value="+49">+49 (Germany)</option>
+                            <!-- Add more country codes as needed -->
+                        </select>
+                    </div>
+                    <div class="w-2/3">
+                        <label for="appPhone" class="block text-left text-gray-300 text-sm font-medium mb-2">Phone Number</label>
+                        <input type="tel" id="appPhone" name="appPhone" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="e.g., 1234567890" required>
+                    </div>
+                </div>
+                <div>
+                    <label for="appCourse" class="block text-left text-gray-300 text-sm font-medium mb-2">Course of Interest</label>
+                    <select id="appCourse" name="appCourse" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" required>
+                        <option value="">Select a course</option>
+                        <option value="Pytha Modeller Pack (Advanced)">Pytha Modeller Pack (Advanced)</option>
+                        <option value="Pytha Planner Pack (Limited)">Pytha Planner Pack (Limited)</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="appEducation" class="block text-left text-gray-300 text-sm font-medium mb-2">Educational Qualification</label>
+                    <select id="appEducation" name="appEducation" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" required>
+                        <option value="">Select Qualification</option>
+                        <option value="Matriculation (10th)">Matriculation (10th)</option>
+                        <option value="High School">High School</option>
+                        <option value="Degree">Degree</option>
+                        <option value="Diploma">Diploma</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="appBatchTime" class="block text-left text-gray-300 text-sm font-medium mb-2">Time of Batch</label>
+                    <select id="appBatchTime" name="appBatchTime" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" required>
+                        <option value="">Select Batch Time</option>
+                        <option value="Morning (9.30am-12.30pm)">Morning (9.30am-12.30pm)</option>
+                        <option value="Evening (2.00pm-5.00pm)">Evening (2.00pm-5.00pm)</option>
+                    </select>
+                </div>
+                <button type="button" id="submitApplicationWhatsappBtn" class="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-6 rounded-md shadow-lg transition duration-300 transform hover:scale-105 mt-4">
+                    Submit Application via WhatsApp
+                </button>
+                <button type="button" id="submitApplicationEmailBtn" class="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-6 rounded-md shadow-lg transition duration-300 transform hover:scale-105 mt-4">
+                    Submit Application via Email
+                </button>
+            </form>
+        </div>
+    </div>
 
     <script>
         // Smooth scrolling for navigation links
@@ -343,7 +467,7 @@
                 }
             });
 
-            // WhatsApp Integration
+            // Original Contact Form WhatsApp Integration
             const sendWhatsappBtn = document.getElementById('sendWhatsappBtn');
             sendWhatsappBtn.addEventListener('click', function(e) {
                 e.preventDefault(); // Prevent default form submission
@@ -369,7 +493,7 @@
                 document.getElementById('contactForm').reset();
             });
 
-            // Email Integration
+            // Original Contact Form Email Integration
             const sendEmailBtn = document.getElementById('sendEmailBtn');
             sendEmailBtn.addEventListener('click', function(e) {
                 e.preventDefault(); // Prevent default form submission
@@ -393,6 +517,71 @@
                 document.getElementById('contactForm').reset();
             });
         };
+
+        // Modal Functions
+        let selectedCourse = ''; // Variable to store the course selected
+
+        function openApplicationForm(course) {
+            selectedCourse = course;
+            document.getElementById('appCourse').value = course; // Pre-fill the course dropdown
+            document.getElementById('applicationModal').style.display = 'flex'; // Use flex to center
+        }
+
+        function closeApplicationForm() {
+            document.getElementById('applicationModal').style.display = 'none';
+            document.getElementById('applicationForm').reset(); // Clear form on close
+        }
+
+        // Handle submission for the Application Form via WhatsApp
+        document.getElementById('submitApplicationWhatsappBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            const appName = document.getElementById('appName').value;
+            const appEmail = document.getElementById('appEmail').value;
+            const appCountryCode = document.getElementById('appCountryCode').value;
+            const appPhone = document.getElementById('appPhone').value;
+            const appCourse = document.getElementById('appCourse').value;
+            const appEducation = document.getElementById('appEducation').value;
+            const appBatchTime = document.getElementById('appBatchTime').value; // New field
+            const phoneNumber = '7034464621'; // Your WhatsApp number
+
+            const whatsappMessage = `*New Course Application*\n\n` +
+                                    `Full Name: ${appName}\n` +
+                                    `Email: ${appEmail}\n` +
+                                    `Phone: ${appCountryCode}${appPhone}\n` + // Include country code
+                                    `Course of Interest: ${appCourse}\n` +
+                                    `Educational Qualification: ${appEducation}\n` + // Updated label
+                                    `Time of Batch: ${appBatchTime}`; // New field
+
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
+            closeApplicationForm(); // Close modal after submission
+        });
+
+        // Handle submission for the Application Form via Email
+        document.getElementById('submitApplicationEmailBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            const appName = document.getElementById('appName').value;
+            const appEmail = document.getElementById('appEmail').value;
+            const appCountryCode = document.getElementById('appCountryCode').value;
+            const appPhone = document.getElementById('appPhone').value;
+            const appCourse = document.getElementById('appCourse').value;
+            const appEducation = document.getElementById('appEducation').value;
+            const appBatchTime = document.getElementById('appBatchTime').value; // New field
+            const recipientEmail = 'info@surabhiinstitute.com'; // Your institute's email
+
+            const emailSubject = encodeURIComponent(`New Course Application: ${appName} - ${appCourse}`);
+            const emailBody = encodeURIComponent(`Full Name: ${appName}\n` +
+                                                `Email: ${appEmail}\n` +
+                                                `Phone: ${appCountryCode}${appPhone}\n` + // Include country code
+                                                `Course of Interest: ${appCourse}\n` +
+                                                `Educational Qualification: ${appEducation}\n` + // Updated label
+                                                `Time of Batch: ${appBatchTime}`); // New field
+
+            const mailtoUrl = `mailto:${recipientEmail}?subject=${emailSubject}&body=${emailBody}`;
+            window.open(mailtoUrl, '_blank');
+            closeApplicationForm(); // Close modal after submission
+        });
     </script>
 </body>
 </html>
