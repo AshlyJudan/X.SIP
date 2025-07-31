@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Application Form</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Georgia&display=swap" rel="stylesheet">
+    <!-- jsPDF CDN for generating PDFs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #1a202c;
+        }
+        .container {
+            max-width: 800px;
+        }
+    </style>
+</head>
+<body class="text-gray-100">
+    <div class="container mx-auto p-4 sm:p-8 bg-gray-900 rounded-xl shadow-lg my-8">
+        <h1 class="text-3xl sm:text-4xl font-bold text-yellow-400 mb-8 text-center">Course Application Form</h1>
+        <form id="applicationForm" class="space-y-6">
+            <!-- Section 1: Personal Details -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-md">
+                <h2 class="text-xl sm:text-2xl font-semibold text-yellow-300 mb-4">1. Personal Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <label for="firstName" class="block text-gray-300 text-sm font-medium mb-1">First Name</label>
+                        <input type="text" id="firstName" name="firstName" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                    </div>
+                    <div>
+                        <label for="secondName" class="block text-gray-300 text-sm font-medium mb-1">Second Name</label>
+                        <input type="text" id="secondName" name="secondName" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                    </div>
+                    <div>
+                        <label for="lastName" class="block text-gray-300 text-sm font-medium mb-1">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="email" class="block text-gray-300 text-sm font-medium mb-1">Email ID</label>
+                        <input type="email" id="email" name="email" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                    </div>
+                    <div>
+                        <label for="education" class="block text-gray-300 text-sm font-medium mb-1">Educational Qualification</label>
+                        <select id="education" name="education" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                            <option value="">Select Qualification</option>
+                            <option value="Matriculation (10th)">Matriculation (10th)</option>
+                            <option value="High School">High School</option>
+                            <option value="Degree">Degree</option>
+                            <option value="Diploma">Diploma</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="phone" class="block text-gray-300 text-sm font-medium mb-1">Phone Number (What's app)</label>
+                        <input type="tel" id="phone" name="phone" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                    </div>
+                    <div>
+                        <label for="country" class="block text-gray-300 text-sm font-medium mb-1">Country</label>
+                        <select id="country" name="country" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                            <!-- List of countries will be populated here -->
+                            <option value="India" selected>India</option>
+                            <option value="United States">United States</option>
+                            <option value="United Kingdom">United Kingdom</option>
+                            <option value="Canada">Canada</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Germany">Germany</option>
+                            <option value="France">France</option>
+                            <option value="Japan">Japan</option>
+                            <option value="China">China</option>
+                            <option value="Brazil">Brazil</option>
+                            <option value="Mexico">Mexico</option>
+                            <option value="South Africa">South Africa</option>
+                            <option value="Nigeria">Nigeria</option>
+                            <option value="Egypt">Egypt</option>
+                            <option value="Russia">Russia</option>
+                            <option value="Saudi Arabia">Saudi Arabia</option>
+                            <option value="United Arab Emirates">United Arab Emirates</option>
+                            <!-- You can add more countries as needed -->
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="address" class="block text-gray-300 text-sm font-medium mb-1">Address</label>
+                        <textarea id="address" name="address" rows="2" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required></textarea>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="pincode" class="block text-gray-300 text-sm font-medium mb-1">Pincode</label>
+                            <input type="text" id="pincode" name="pincode" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                        </div>
+                        <div>
+                            <label for="state" class="block text-gray-300 text-sm font-medium mb-1">State</label>
+                            <input type="text" id="state" name="state" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Course Details -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-md">
+                <h2 class="text-xl sm:text-2xl font-semibold text-yellow-300 mb-4">2. Course Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label for="course" class="block text-gray-300 text-sm font-medium mb-1">Select Course</label>
+                        <select id="course" name="course" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                            <option value="">Select a course</option>
+                            <option value="Pytha Modeller Pack (Advanced)">Pytha Modeller Pack (Advanced)</option>
+                            <option value="Pytha Planner Pack (Limited)">Pytha Planner Pack (Limited)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="batch" class="block text-gray-300 text-sm font-medium mb-1">Preferred Batch</label>
+                        <select id="batch" name="batch" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                            <option value="">Select a batch</option>
+                            <option value="Morning (9:30am-12:30pm)">Morning (9:30am-12:30pm)</option>
+                            <option value="Evening (2:00pm-5:00pm)">Evening (2:00pm-5:00pm)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="laptop" class="block text-gray-300 text-sm font-medium mb-1">Do you have a laptop for Pytha?</label>
+                        <select id="laptop" name="laptop" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                            <option value="">Select an option</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Agreement and Actions -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-md">
+                <h2 class="text-xl sm:text-2xl font-semibold text-yellow-300 mb-4">3. Declaration</h2>
+                <div class="flex items-start mb-6">
+                    <input type="checkbox" id="agreement" name="agreement" class="mt-1 mr-2 accent-yellow-500" required>
+                    <label for="agreement" class="text-gray-300 text-sm">I agree that all the above information provided is correct.</label>
+                </div>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
+                    <button type="button" id="downloadPdfBtn" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+                        Download Application
+                    </button>
+                    <button type="button" id="sendApplicationBtn" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+                        Send Application
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Use an IIFE to encapsulate the script
+        (function() {
+            // Function to get query parameters
+            function getQueryParams() {
+                const params = {};
+                window.location.search.substring(1).split('&').forEach(param => {
+                    const [key, value] = param.split('=');
+                    if (key && value) {
+                        params[decodeURIComponent(key)] = decodeURIComponent(value);
+                    }
+                });
+                return params;
+            }
+
+            // Pre-fill course if present in the URL
+            const queryParams = getQueryParams();
+            if (queryParams.course) {
+                document.getElementById('course').value = queryParams.course;
+            }
+
+            // Get form elements
+            const form = document.getElementById('applicationForm');
+            const downloadBtn = document.getElementById('downloadPdfBtn');
+            const sendBtn = document.getElementById('sendApplicationBtn');
+            const agreementCheckbox = document.getElementById('agreement');
+
+            // Function to collect form data
+            function getFormData() {
+                return {
+                    firstName: document.getElementById('firstName').value,
+                    secondName: document.getElementById('secondName').value,
+                    lastName: document.getElementById('lastName').value,
+                    email: document.getElementById('email').value,
+                    education: document.getElementById('education').value,
+                    phone: document.getElementById('phone').value,
+                    address: document.getElementById('address').value,
+                    pincode: document.getElementById('pincode').value,
+                    state: document.getElementById('state').value,
+                    country: document.getElementById('country').value,
+                    course: document.getElementById('course').value,
+                    batch: document.getElementById('batch').value,
+                    laptop: document.getElementById('laptop').value
+                };
+            }
+
+            // Function to create and download PDF
+            function createAndDownloadPdf(data) {
+                if (!agreementCheckbox.checked) {
+                    alert('Please agree that the information is correct.'); // Using alert as per standard instruction for this platform
+                    return;
+                }
+
+                // Check for form validity
+                if (!form.checkValidity()) {
+                    form.reportValidity(); // This will show native browser validation messages
+                    return;
+                }
+
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+
+                doc.setFontSize(22);
+                doc.text("Course Application Form", 105, 20, null, null, "center");
+
+                doc.setFontSize(16);
+                let yPosition = 40;
+                doc.text("Personal Details", 20, yPosition);
+                doc.line(20, yPosition + 2, 190, yPosition + 2);
+                yPosition += 10;
+                doc.setFontSize(12);
+                doc.text(`Name: ${data.firstName} ${data.secondName} ${data.lastName}`, 20, yPosition);
+                doc.text(`Email: ${data.email}`, 20, yPosition + 10);
+                doc.text(`Phone: ${data.phone}`, 20, yPosition + 20);
+                doc.text(`Educational Qualification: ${data.education}`, 20, yPosition + 30);
+                doc.text(`Address: ${data.address}, ${data.pincode}, ${data.state}, ${data.country}`, 20, yPosition + 40);
+
+                yPosition += 60;
+                doc.setFontSize(16);
+                doc.text("Course Details", 20, yPosition);
+                doc.line(20, yPosition + 2, 190, yPosition + 2);
+                yPosition += 10;
+                doc.setFontSize(12);
+                doc.text(`Course: ${data.course}`, 20, yPosition);
+                doc.text(`Preferred Batch: ${data.batch}`, 20, yPosition + 10);
+                doc.text(`Has Laptop for Pytha?: ${data.laptop}`, 20, yPosition + 20);
+
+                doc.save(`Application_${data.firstName}_${data.lastName}.pdf`);
+            }
+
+            // Event listener for Download button
+            downloadBtn.addEventListener('click', () => {
+                const data = getFormData();
+                createAndDownloadPdf(data);
+            });
+
+            // Event listener for Send button (WhatsApp)
+            sendBtn.addEventListener('click', () => {
+                const data = getFormData();
+                if (!agreementCheckbox.checked) {
+                    alert('Please agree that the information is correct.');
+                    return;
+                }
+
+                // Check for form validity
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                // First, create the PDF
+                createAndDownloadPdf(data);
+
+                // Then, prepare the WhatsApp message. Cannot attach files via URL, so we prompt the user.
+                const phoneNumber = '7034464621';
+                const whatsappMessage = `Hello Surabhi Institute,\n\nI have just submitted my application form. Please find the attached PDF.\n\nThank you,\n${data.firstName} ${data.lastName}`;
+                const encodedMessage = encodeURIComponent(whatsappMessage);
+                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+                // Open WhatsApp after a short delay to allow for PDF download
+                setTimeout(() => {
+                    window.open(whatsappUrl, '_blank');
+                }, 1000);
+            });
+        })();
+    </script>
+</body>
+</html>
