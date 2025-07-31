@@ -13,42 +13,49 @@
     <style>
         body {
             font-family: 'Georgia', serif;
-            background-color: #1a202c;
+            background-color: #0d1117;
+            background-image: radial-gradient(#2f3946 1px, transparent 1px);
+            background-size: 20px 20px;
         }
         .container {
             max-width: 800px;
         }
+        input:focus, select:focus, textarea:focus {
+            box-shadow: 0 0 0 3px rgba(253, 224, 71, 0.5); /* A softer, glowing yellow shadow */
+        }
     </style>
 </head>
 <body class="text-gray-100">
-    <div class="container mx-auto p-4 sm:p-8 bg-gray-900 rounded-xl shadow-lg my-8">
-        <h1 class="text-3xl sm:text-4xl font-bold text-yellow-400 mb-8 text-center">Course Application Form</h1>
-        <form id="applicationForm" class="space-y-6">
+    <div class="container mx-auto p-4 sm:p-8 bg-gray-900 rounded-2xl shadow-2xl my-8 border border-gray-700">
+        <h1 class="text-3xl sm:text-4xl font-bold text-yellow-400 mb-8 text-center tracking-wide">
+            Course Application Form
+        </h1>
+        <form id="applicationForm" class="space-y-8">
             <!-- Section 1: Personal Details -->
-            <div class="bg-gray-800 p-6 rounded-lg shadow-md">
-                <h2 class="text-xl sm:text-2xl font-semibold text-yellow-300 mb-4">1. Personal Details</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            <div class="bg-gray-800 p-6 rounded-xl shadow-inner border border-gray-700">
+                <h2 class="text-xl sm:text-2xl font-semibold text-yellow-300 mb-6">1. Personal Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                     <div>
                         <label for="firstName" class="block text-gray-300 text-sm font-medium mb-1">First Name</label>
-                        <input type="text" id="firstName" name="firstName" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                        <input type="text" id="firstName" name="firstName" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
                     </div>
                     <div>
                         <label for="secondName" class="block text-gray-300 text-sm font-medium mb-1">Second Name</label>
-                        <input type="text" id="secondName" name="secondName" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                        <input type="text" id="secondName" name="secondName" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200">
                     </div>
                     <div>
                         <label for="lastName" class="block text-gray-300 text-sm font-medium mb-1">Last Name</label>
-                        <input type="text" id="lastName" name="lastName" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                        <input type="text" id="lastName" name="lastName" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200">
                     </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
                         <label for="email" class="block text-gray-300 text-sm font-medium mb-1">Email ID</label>
-                        <input type="email" id="email" name="email" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                        <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
                     </div>
                     <div>
                         <label for="education" class="block text-gray-300 text-sm font-medium mb-1">Educational Qualification</label>
-                        <select id="education" name="education" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                        <select id="education" name="education" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
                             <option value="">Select Qualification</option>
                             <option value="Matriculation (10th)">Matriculation (10th)</option>
                             <option value="High School">High School</option>
@@ -57,14 +64,14 @@
                         </select>
                     </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
                         <label for="phone" class="block text-gray-300 text-sm font-medium mb-1">Phone Number (What's app)</label>
-                        <input type="tel" id="phone" name="phone" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                        <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
                     </div>
                     <div>
                         <label for="country" class="block text-gray-300 text-sm font-medium mb-1">Country</label>
-                        <select id="country" name="country" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                        <select id="country" name="country" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
                             <!-- List of countries will be populated here -->
                             <option value="India" selected>India</option>
                             <option value="United States">United States</option>
@@ -87,31 +94,31 @@
                         </select>
                     </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label for="address" class="block text-gray-300 text-sm font-medium mb-1">Address</label>
-                        <textarea id="address" name="address" rows="2" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required></textarea>
+                        <textarea id="address" name="address" rows="2" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required></textarea>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                             <label for="pincode" class="block text-gray-300 text-sm font-medium mb-1">Pincode</label>
-                            <input type="text" id="pincode" name="pincode" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                            <input type="text" id="pincode" name="pincode" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
                         </div>
                         <div>
                             <label for="state" class="block text-gray-300 text-sm font-medium mb-1">State</label>
-                            <input type="text" id="state" name="state" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                            <input type="text" id="state" name="state" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Section 2: Course Details -->
-            <div class="bg-gray-800 p-6 rounded-lg shadow-md">
-                <h2 class="text-xl sm:text-2xl font-semibold text-yellow-300 mb-4">2. Course Details</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-gray-800 p-6 rounded-xl shadow-inner border border-gray-700">
+                <h2 class="text-xl sm:text-2xl font-semibold text-yellow-300 mb-6">2. Course Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
                         <label for="course" class="block text-gray-300 text-sm font-medium mb-1">Select Course</label>
-                        <select id="course" name="course" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                        <select id="course" name="course" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
                             <option value="">Select a course</option>
                             <option value="Pytha Modeller Pack (Advanced)">Pytha Modeller Pack (Advanced)</option>
                             <option value="Pytha Planner Pack (Limited)">Pytha Planner Pack (Limited)</option>
@@ -119,7 +126,7 @@
                     </div>
                     <div>
                         <label for="batch" class="block text-gray-300 text-sm font-medium mb-1">Preferred Batch</label>
-                        <select id="batch" name="batch" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                        <select id="batch" name="batch" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
                             <option value="">Select a batch</option>
                             <option value="Morning (9:30am-12:30pm)">Morning (9:30am-12:30pm)</option>
                             <option value="Evening (2:00pm-5:00pm)">Evening (2:00pm-5:00pm)</option>
@@ -127,7 +134,7 @@
                     </div>
                     <div>
                         <label for="laptop" class="block text-gray-300 text-sm font-medium mb-1">Do you have a laptop for Pytha?</label>
-                        <select id="laptop" name="laptop" class="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                        <select id="laptop" name="laptop" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
                             <option value="">Select an option</option>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
@@ -137,17 +144,17 @@
             </div>
 
             <!-- Section 3: Agreement and Actions -->
-            <div class="bg-gray-800 p-6 rounded-lg shadow-md">
-                <h2 class="text-xl sm:text-2xl font-semibold text-yellow-300 mb-4">3. Declaration</h2>
+            <div class="bg-gray-800 p-6 rounded-xl shadow-inner border border-gray-700">
+                <h2 class="text-xl sm:text-2xl font-semibold text-yellow-300 mb-6">3. Declaration</h2>
                 <div class="flex items-start mb-6">
                     <input type="checkbox" id="agreement" name="agreement" class="mt-1 mr-2 accent-yellow-500" required>
                     <label for="agreement" class="text-gray-300 text-sm">I agree that all the above information provided is correct.</label>
                 </div>
                 <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
-                    <button type="button" id="downloadPdfBtn" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+                    <button type="button" id="downloadPdfBtn" class="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105 active:scale-100">
                         Download Application
                     </button>
-                    <button type="button" id="sendApplicationBtn" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+                    <button type="button" id="sendApplicationBtn" class="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-gray-900 py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105 active:scale-100">
                         Send Application
                     </button>
                 </div>
@@ -204,43 +211,122 @@
             // Function to create and download PDF
             function createAndDownloadPdf(data) {
                 if (!agreementCheckbox.checked) {
-                    alert('Please agree that the information is correct.'); // Using alert as per standard instruction for this platform
+                    alert('Please agree that the information is correct.');
                     return;
                 }
 
-                // Check for form validity
                 if (!form.checkValidity()) {
-                    form.reportValidity(); // This will show native browser validation messages
+                    form.reportValidity();
                     return;
                 }
 
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
+                const margin = 20;
+                let yPosition = margin;
+                const pageHeight = doc.internal.pageSize.getHeight();
+                const pageWidth = doc.internal.pageSize.getWidth();
+                
+                // --- Header Section ---
+                doc.setFillColor(30, 41, 59); // Dark blue background
+                doc.rect(0, 0, pageWidth, 30, "F");
+                
+                doc.setFontSize(20);
+                doc.setTextColor(255, 255, 255); // White text
+                doc.setFont("helvetica", "bold");
+                doc.text("Surabhi Institute of Pytha CAD", pageWidth / 2, 15, { align: "center" });
 
-                doc.setFontSize(22);
-                doc.text("Course Application Form", 105, 20, null, null, "center");
-
-                doc.setFontSize(16);
-                let yPosition = 40;
-                doc.text("Personal Details", 20, yPosition);
-                doc.line(20, yPosition + 2, 190, yPosition + 2);
-                yPosition += 10;
                 doc.setFontSize(12);
-                doc.text(`Name: ${data.firstName} ${data.secondName} ${data.lastName}`, 20, yPosition);
-                doc.text(`Email: ${data.email}`, 20, yPosition + 10);
-                doc.text(`Phone: ${data.phone}`, 20, yPosition + 20);
-                doc.text(`Educational Qualification: ${data.education}`, 20, yPosition + 30);
-                doc.text(`Address: ${data.address}, ${data.pincode}, ${data.state}, ${data.country}`, 20, yPosition + 40);
+                doc.setTextColor(203, 213, 225); // Light gray text
+                doc.setFont("helvetica", "normal");
+                doc.text("Course Application Form", pageWidth / 2, 23, { align: "center" });
+                
+                doc.setDrawColor(253, 224, 71); // Yellow color for the line
+                doc.setLineWidth(1);
+                doc.line(margin, 30, pageWidth - margin, 30);
+                
+                yPosition = 40;
 
-                yPosition += 60;
-                doc.setFontSize(16);
-                doc.text("Course Details", 20, yPosition);
-                doc.line(20, yPosition + 2, 190, yPosition + 2);
-                yPosition += 10;
-                doc.setFontSize(12);
-                doc.text(`Course: ${data.course}`, 20, yPosition);
-                doc.text(`Preferred Batch: ${data.batch}`, 20, yPosition + 10);
-                doc.text(`Has Laptop for Pytha?: ${data.laptop}`, 20, yPosition + 20);
+                // Helper function to add a section with a formatted title
+                function addSectionTitle(title) {
+                    doc.setFontSize(16);
+                    doc.setTextColor(253, 224, 71); // Tailwind's yellow-400
+                    doc.setFont("helvetica", "bold");
+                    doc.text(title, margin, yPosition);
+                    yPosition += 8;
+                    doc.setDrawColor(253, 224, 71);
+                    doc.setLineWidth(0.5);
+                    doc.line(margin, yPosition, margin + 50, yPosition);
+                    yPosition += 8;
+                }
+
+                // Helper function to add a key-value pair in a structured box
+                function addKeyValuePair(label, value) {
+                    const rowHeight = 15;
+                    const labelWidth = 60;
+                    const valueX = margin + labelWidth;
+
+                    // Check for new page
+                    if (yPosition + rowHeight > pageHeight - margin) {
+                        doc.addPage();
+                        yPosition = margin;
+                    }
+
+                    // Draw the box for the detail, now with a white background and gray border
+                    doc.setFillColor(255, 255, 255); // White background
+                    doc.rect(margin, yPosition, pageWidth - (margin * 2), rowHeight, "F");
+                    doc.setDrawColor(107, 114, 128); // Gray border (Tailwind's gray-500)
+                    doc.rect(margin, yPosition, pageWidth - (margin * 2), rowHeight, "S");
+
+                    doc.setFontSize(10);
+                    doc.setFont("helvetica", "bold");
+                    doc.setTextColor(0, 0, 0); // Black text
+                    doc.text(label, margin + 2, yPosition + (rowHeight / 2) + 2, {
+                        align: "left",
+                        baseline: "middle"
+                    });
+                    
+                    doc.setFont("helvetica", "normal");
+                    doc.setTextColor(0, 0, 0); // Black text
+                    
+                    const valueText = doc.splitTextToSize(value, pageWidth - (margin * 2) - labelWidth - 5);
+                    const valueTextHeight = (valueText.length - 1) * doc.getLineHeight() + doc.getLineHeight();
+                    
+                    doc.text(valueText, valueX + 2, yPosition + (rowHeight / 2) + 2, {
+                        align: "left",
+                        baseline: "middle"
+                    });
+
+                    yPosition += rowHeight;
+                }
+
+                // --- Section 1: Personal Details ---
+                addSectionTitle("1. Personal Details");
+                addKeyValuePair("Full Name:", `${data.firstName} ${data.secondName} ${data.lastName}`);
+                addKeyValuePair("Email ID:", data.email);
+                addKeyValuePair("Phone Number:", data.phone);
+                addKeyValuePair("Qualification:", data.education);
+                addKeyValuePair("Address:", data.address);
+                addKeyValuePair("Pincode:", data.pincode);
+                addKeyValuePair("State:", data.state);
+                addKeyValuePair("Country:", data.country);
+                yPosition += 10; // Add space between sections
+
+                // --- Section 2: Course Details ---
+                addSectionTitle("2. Course Details");
+                addKeyValuePair("Course:", data.course);
+                addKeyValuePair("Preferred Batch:", data.batch);
+                addKeyValuePair("Has Laptop:", data.laptop);
+                yPosition += 10; // Add space between sections
+                
+                // --- Footer ---
+                doc.setDrawColor(107, 114, 128); // Tailwind's gray-500
+                doc.setLineWidth(0.5);
+                doc.line(margin, pageHeight - 20, pageWidth - margin, pageHeight - 20);
+                
+                doc.setFontSize(10);
+                doc.setTextColor(156, 163, 175); // Lighter gray
+                doc.text("Surabhi Institute of Pytha CAD | Ph: 7034464621 | Email: ashly.pyo@gmail.com", pageWidth / 2, pageHeight - 10, { align: "center" });
 
                 doc.save(`Application_${data.firstName}_${data.lastName}.pdf`);
             }
@@ -259,7 +345,6 @@
                     return;
                 }
 
-                // Check for form validity
                 if (!form.checkValidity()) {
                     form.reportValidity();
                     return;
