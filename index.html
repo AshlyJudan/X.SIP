@@ -29,7 +29,6 @@
             width: 100%;
             height: 100%;
             z-index: 0; /* Place it behind the text and navigation */
-            /* Removed background-color and border-radius as per new requirement */
         }
         /* Ensure the main content of the header (title, nav) appears above the canvas */
         .header-content-container {
@@ -46,57 +45,6 @@
             .header-content-container {
                 flex-direction: row; /* Change to row for larger screens */
             }
-        }
-
-        /* Modal specific styles */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
-            justify-content: center;
-            align-items: center;
-            padding: 20px; /* Add some padding around the modal content */
-        }
-
-        .modal-content {
-            background-color: #1f2937; /* Gray-800 equivalent */
-            margin: auto;
-            padding: 30px;
-            border-radius: 0.75rem; /* rounded-xl */
-            width: 90%; /* Responsive width */
-            max-width: 600px; /* Max width for larger screens */
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5); /* Shadow for depth */
-            position: relative;
-            animation: fadeIn 0.3s ease-out; /* Simple fade-in animation */
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .close-button {
-            color: #aaa;
-            position: absolute;
-            top: 15px;
-            right: 25px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .close-button:hover,
-        .close-button:focus {
-            color: #fff;
-            text-decoration: none;
-            cursor: pointer;
         }
     </style>
 </head>
@@ -189,7 +137,7 @@
                     </ul>
                     <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mt-auto">
                         <a href="pytha-modeller-pack.html" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-full shadow-md transition duration-300">Learn More</a>
-                        <button type="button" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-full shadow-md transition duration-300" onclick="openApplicationForm('Pytha Modeller Pack (Advanced)')">Apply Now</button>
+                        <a href="application-form.html?course=Pytha Modeller Pack (Advanced)" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-full shadow-md transition duration-300">Apply Now</a>
                     </div>
                 </div>
 
@@ -205,7 +153,7 @@
                     </ul>
                     <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mt-auto">
                         <a href="pytha-planner-pack.html" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-full shadow-md transition duration-300">Learn More</a>
-                        <button type="button" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-full shadow-md transition duration-300" onclick="openApplicationForm('Pytha Planner Pack (Limited)')">Apply Now</button>
+                        <a href="application-form.html?course=Pytha Planner Pack (Limited)" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-full shadow-md transition duration-300">Apply Now</a>
                     </div>
                 </div>
             </div>
@@ -237,7 +185,6 @@
                     <button type="button" id="sendWhatsappBtn" class="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-6 rounded-md shadow-lg transition duration-300 transform hover:scale-105">
                         Send Message via WhatsApp
                     </button>
-                    <!-- Send Message via Email button removed -->
                 </form>
                 <div class="mt-8 text-gray-300 text-left">
                     <p><strong class="text-yellow-400">Address:</strong><br>Surabhi Institute of Pytha CAD,<br>2rd Floor, Top of Surabhi Module, Edappally - Pukkattupady Rd,<br>Kakkanad, Kochi,<br>India</p>
@@ -257,72 +204,7 @@
                 <a href="#" class="hover:text-yellow-200 transition duration-300">Terms of Service</a>
             </div>
         </div>
-    </footer >
-
-    <!-- Application Form Modal -->
-    <div id="applicationModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeApplicationForm()">&times;</span>
-            <h3 class="text-2xl sm:text-3xl font-bold text-yellow-400 mb-6 text-center">Course Application Form</h3>
-            <form class="space-y-4" id="applicationForm">
-                <div>
-                    <label for="appName" class="block text-left text-gray-300 text-sm font-medium mb-2">Full Name</label>
-                    <input type="text" id="appName" name="appName" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="Your Full Name" required>
-                </div>
-                <div>
-                    <label for="appEmail" class="block text-left text-gray-300 text-sm font-medium mb-2">Email</label>
-                    <input type="email" id="appEmail" name="appEmail" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="your@example.com" required>
-                </div>
-                <div class="flex space-x-2">
-                    <div class="w-1/3">
-                        <label for="appCountryCode" class="block text-left text-gray-300 text-sm font-medium mb-2">Code</label>
-                        <select id="appCountryCode" name="appCountryCode" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100">
-                            <option value="+91" selected>+91 (India)</option>
-                            <option value="+1">+1 (USA/Canada)</option>
-                            <option value="+44">+44 (UK)</option>
-                            <option value="+61">+61 (Australia)</option>
-                            <option value="+49">+49 (Germany)</option>
-                            <!-- Add more country codes as needed -->
-                        </select>
-                    </div>
-                    <div class="w-2/3">
-                        <label for="appPhone" class="block text-left text-gray-300 text-sm font-medium mb-2">Phone Number</label>
-                        <input type="tel" id="appPhone" name="appPhone" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="e.g., 1234567890" required>
-                    </div>
-                </div>
-                <div>
-                    <label for="appCourse" class="block text-left text-gray-300 text-sm font-medium mb-2">Course of Interest</label>
-                    <select id="appCourse" name="appCourse" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" required>
-                        <option value="">Select a course</option>
-                        <option value="Pytha Modeller Pack (Advanced)">Pytha Modeller Pack (Advanced)</option>
-                        <option value="Pytha Planner Pack (Limited)">Pytha Planner Pack (Limited)</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="appEducation" class="block text-left text-gray-300 text-sm font-medium mb-2">Educational Qualification</label>
-                    <select id="appEducation" name="appEducation" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" required>
-                        <option value="">Select Qualification</option>
-                        <option value="Matriculation (10th)">Matriculation (10th)</option>
-                        <option value="High School">High School</option>
-                        <option value="Degree">Degree</option>
-                        <option value="Diploma">Diploma</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="appBatchTime" class="block text-left text-gray-300 text-sm font-medium mb-2">Time of Batch</label>
-                    <select id="appBatchTime" name="appBatchTime" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" required>
-                        <option value="">Select Batch Time</option>
-                        <option value="Morning (9.30am-12.30pm)">Morning (9.30am-12.30pm)</option>
-                        <option value="Evening (2.00pm-5.00pm)">Evening (2.00pm-5.00pm)</option>
-                    </select>
-                </div>
-                <button type="button" id="submitApplicationWhatsappBtn" class="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-6 rounded-md shadow-lg transition duration-300 transform hover:scale-105 mt-4">
-                    Submit Application via WhatsApp
-                </button>
-                <!-- Submit Application via Email button removed -->
-            </form>
-        </div>
-    </div>
+    </footer>
 
     <script>
         // Smooth scrolling for navigation links
@@ -462,12 +344,12 @@
                 e.preventDefault(); // Prevent default form submission
 
                 const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value; // Re-added
+                const email = document.getElementById('email').value;
                 const message = document.getElementById('message').value;
                 const phoneNumber = '7034464621'; // Your WhatsApp number
 
                 // Construct the message
-                const whatsappMessage = `Hello Surabhi Institute,\n\nI have a message from your website:\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`; // Email re-added
+                const whatsappMessage = `Hello Surabhi Institute,\n\nI have a message from your website:\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
 
                 // Encode the message for URL
                 const encodedMessage = encodeURIComponent(whatsappMessage);
@@ -481,51 +363,7 @@
                 // Optionally, clear the form after opening WhatsApp
                 document.getElementById('contactForm').reset();
             });
-
-            // Original Contact Form Email Integration removed
         };
-
-        // Modal Functions
-        let selectedCourse = ''; // Variable to store the course selected
-
-        function openApplicationForm(course) {
-            selectedCourse = course;
-            document.getElementById('appCourse').value = course; // Pre-fill the course dropdown
-            document.getElementById('applicationModal').style.display = 'flex'; // Use flex to center
-        }
-
-        function closeApplicationForm() {
-            document.getElementById('applicationModal').style.display = 'none';
-            document.getElementById('applicationForm').reset(); // Clear form on close
-        }
-
-        // Handle submission for the Application Form via WhatsApp (only WhatsApp remains)
-        document.getElementById('submitApplicationWhatsappBtn').addEventListener('click', function(e) {
-            e.preventDefault();
-            const appName = document.getElementById('appName').value;
-            const appEmail = document.getElementById('appEmail').value; // Re-added
-            const appCountryCode = document.getElementById('appCountryCode').value;
-            const appPhone = document.getElementById('appPhone').value;
-            const appCourse = document.getElementById('appCourse').value;
-            const appEducation = document.getElementById('appEducation').value;
-            const appBatchTime = document.getElementById('appBatchTime').value; // New field
-            const phoneNumber = '7034464621'; // Your WhatsApp number
-
-            const whatsappMessage = `*New Course Application*\n\n` +
-                                    `Full Name: ${appName}\n` +
-                                    `Email: ${appEmail}\n` + // Re-added
-                                    `Phone: ${appCountryCode}${appPhone}\n` + // Include country code
-                                    `Course of Interest: ${appCourse}\n` +
-                                    `Educational Qualification: ${appEducation}\n` + // Updated label
-                                    `Time of Batch: ${appBatchTime}`; // New field
-
-            const encodedMessage = encodeURIComponent(whatsappMessage);
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-            window.open(whatsappUrl, '_blank');
-            closeApplicationForm(); // Close modal after submission
-        });
-
-        // Handle submission for the Application Form via Email removed
     </script>
 </body>
 </html>
