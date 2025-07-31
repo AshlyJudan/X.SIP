@@ -224,10 +224,7 @@
                         <label for="name" class="block text-left text-gray-300 text-sm font-medium mb-2">Name</label>
                         <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="Your Name" required>
                     </div>
-                    <div>
-                        <label for="email" class="block text-left text-gray-300 text-sm font-medium mb-2">Email</label>
-                        <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="your@example.com" required>
-                    </div>
+                    <!-- Email field removed -->
                     <div>
                         <label for="message" class="block text-left text-gray-300 text-sm font-medium mb-2">Message</label>
                         <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="Your message..." required></textarea>
@@ -235,9 +232,7 @@
                     <button type="button" id="sendWhatsappBtn" class="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-6 rounded-md shadow-lg transition duration-300 transform hover:scale-105">
                         Send Message via WhatsApp
                     </button>
-                    <button type="button" id="sendEmailBtn" class="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-6 rounded-md shadow-lg transition duration-300 transform hover:scale-105 mt-4">
-                        Send Message via Email
-                    </button>
+                    <!-- Send Message via Email button removed -->
                 </form>
                 <div class="mt-8 text-gray-300 text-left">
                     <p><strong class="text-yellow-400">Address:</strong><br>Surabhi Institute of Pytha CAD,<br>2rd Floor, Top of Surabhi Module, Edappally - Pukkattupady Rd,<br>Kakkanad, Kochi,<br>India</p>
@@ -269,10 +264,7 @@
                     <label for="appName" class="block text-left text-gray-300 text-sm font-medium mb-2">Full Name</label>
                     <input type="text" id="appName" name="appName" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="Your Full Name" required>
                 </div>
-                <div>
-                    <label for="appEmail" class="block text-left text-gray-300 text-sm font-medium mb-2">Email</label>
-                    <input type="email" id="appEmail" name="appEmail" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="your@example.com" required>
-                </div>
+                <!-- Email field removed from modal -->
                 <div class="flex space-x-2">
                     <div class="w-1/3">
                         <label for="appCountryCode" class="block text-left text-gray-300 text-sm font-medium mb-2">Code</label>
@@ -319,9 +311,7 @@
                 <button type="button" id="submitApplicationWhatsappBtn" class="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-6 rounded-md shadow-lg transition duration-300 transform hover:scale-105 mt-4">
                     Submit Application via WhatsApp
                 </button>
-                <button type="button" id="submitApplicationEmailBtn" class="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-6 rounded-md shadow-lg transition duration-300 transform hover:scale-105 mt-4">
-                    Submit Application via Email
-                </button>
+                <!-- Submit Application via Email button removed -->
             </form>
         </div>
     </div>
@@ -467,18 +457,18 @@
                 }
             });
 
-            // Original Contact Form WhatsApp Integration
+            // Original Contact Form WhatsApp Integration (only WhatsApp remains)
             const sendWhatsappBtn = document.getElementById('sendWhatsappBtn');
             sendWhatsappBtn.addEventListener('click', function(e) {
                 e.preventDefault(); // Prevent default form submission
 
                 const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
+                // const email = document.getElementById('email').value; // Removed
                 const message = document.getElementById('message').value;
                 const phoneNumber = '7034464621'; // Your WhatsApp number
 
                 // Construct the message
-                const whatsappMessage = `Hello Surabhi Institute,\n\nI have a message from your website:\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+                const whatsappMessage = `Hello Surabhi Institute,\n\nI have a message from your website:\n\nName: ${name}\n\nMessage:\n${message}`; // Email removed
 
                 // Encode the message for URL
                 const encodedMessage = encodeURIComponent(whatsappMessage);
@@ -493,29 +483,7 @@
                 document.getElementById('contactForm').reset();
             });
 
-            // Original Contact Form Email Integration
-            const sendEmailBtn = document.getElementById('sendEmailBtn');
-            sendEmailBtn.addEventListener('click', function(e) {
-                e.preventDefault(); // Prevent default form submission
-
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const message = document.getElementById('message').value;
-                const recipientEmail = 'ashly.pyo@gmail.com'; // Updated email address
-
-                // Construct the subject and body for the email
-                const emailSubject = encodeURIComponent(`Inquiry from Website: ${name}`);
-                const emailBody = encodeURIComponent(`Hello Surabhi Institute,\n\nI have a message from your website:\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-
-                // Create the mailto URL
-                const mailtoUrl = `mailto:${recipientEmail}?subject=${emailSubject}&body=${emailBody}`;
-
-                // Open default email client
-                window.open(mailtoUrl, '_blank');
-
-                // Optionally, clear the form after opening email client
-                document.getElementById('contactForm').reset();
-            });
+            // Original Contact Form Email Integration removed
         };
 
         // Modal Functions
@@ -532,11 +500,11 @@
             document.getElementById('applicationForm').reset(); // Clear form on close
         }
 
-        // Handle submission for the Application Form via WhatsApp
+        // Handle submission for the Application Form via WhatsApp (only WhatsApp remains)
         document.getElementById('submitApplicationWhatsappBtn').addEventListener('click', function(e) {
             e.preventDefault();
             const appName = document.getElementById('appName').value;
-            const appEmail = document.getElementById('appEmail').value;
+            // const appEmail = document.getElementById('appEmail').value; // Removed
             const appCountryCode = document.getElementById('appCountryCode').value;
             const appPhone = document.getElementById('appPhone').value;
             const appCourse = document.getElementById('appCourse').value;
@@ -546,7 +514,7 @@
 
             const whatsappMessage = `*New Course Application*\n\n` +
                                     `Full Name: ${appName}\n` +
-                                    `Email: ${appEmail}\n` +
+                                    // `Email: ${appEmail}\n` + // Removed
                                     `Phone: ${appCountryCode}${appPhone}\n` + // Include country code
                                     `Course of Interest: ${appCourse}\n` +
                                     `Educational Qualification: ${appEducation}\n` + // Updated label
@@ -558,30 +526,7 @@
             closeApplicationForm(); // Close modal after submission
         });
 
-        // Handle submission for the Application Form via Email
-        document.getElementById('submitApplicationEmailBtn').addEventListener('click', function(e) {
-            e.preventDefault();
-            const appName = document.getElementById('appName').value;
-            const appEmail = document.getElementById('appEmail').value;
-            const appCountryCode = document.getElementById('appCountryCode').value;
-            const appPhone = document.getElementById('appPhone').value;
-            const appCourse = document.getElementById('appCourse').value;
-            const appEducation = document.getElementById('appEducation').value;
-            const appBatchTime = document.getElementById('appBatchTime').value; // New field
-            const recipientEmail = 'ashly.pyo@gmail.com'; // Updated email address
-
-            const emailSubject = encodeURIComponent(`New Course Application: ${appName} - ${appCourse}`);
-            const emailBody = encodeURIComponent(`Full Name: ${appName}\n` +
-                                                `Email: ${appEmail}\n` +
-                                                `Phone: ${appCountryCode}${appPhone}\n` + // Include country code
-                                                `Course of Interest: ${appCourse}\n` +
-                                                `Educational Qualification: ${appEducation}\n` + // Updated label
-                                                `Time of Batch: ${appBatchTime}`); // New field
-
-            const mailtoUrl = `mailto:${recipientEmail}?subject=${emailSubject}&body=${emailBody}`;
-            window.open(mailtoUrl, '_blank');
-            closeApplicationForm(); // Close modal after submission
-        });
+        // Handle submission for the Application Form via Email removed
     </script>
 </body>
 </html>
