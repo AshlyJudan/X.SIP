@@ -224,7 +224,10 @@
                         <label for="name" class="block text-left text-gray-300 text-sm font-medium mb-2">Name</label>
                         <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="Your Name" required>
                     </div>
-                    <!-- Email field removed -->
+                    <div>
+                        <label for="email" class="block text-left text-gray-300 text-sm font-medium mb-2">Email</label>
+                        <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="your@example.com" required>
+                    </div>
                     <div>
                         <label for="message" class="block text-left text-gray-300 text-sm font-medium mb-2">Message</label>
                         <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="Your message..." required></textarea>
@@ -264,7 +267,10 @@
                     <label for="appName" class="block text-left text-gray-300 text-sm font-medium mb-2">Full Name</label>
                     <input type="text" id="appName" name="appName" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="Your Full Name" required>
                 </div>
-                <!-- Email field removed from modal -->
+                <div>
+                    <label for="appEmail" class="block text-left text-gray-300 text-sm font-medium mb-2">Email</label>
+                    <input type="email" id="appEmail" name="appEmail" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="your@example.com" required>
+                </div>
                 <div class="flex space-x-2">
                     <div class="w-1/3">
                         <label for="appCountryCode" class="block text-left text-gray-300 text-sm font-medium mb-2">Code</label>
@@ -448,27 +454,18 @@
             }
             animate();
 
-            // Add a resize listener to update canvas dimensions and redraw
-            window.addEventListener('resize', () => {
-                const canvas = document.getElementById('logoCanvas');
-                if (canvas) {
-                    canvas.width = canvas.offsetWidth;
-                    canvas.height = canvas.offsetHeight;
-                }
-            });
-
             // Original Contact Form WhatsApp Integration (only WhatsApp remains)
             const sendWhatsappBtn = document.getElementById('sendWhatsappBtn');
             sendWhatsappBtn.addEventListener('click', function(e) {
                 e.preventDefault(); // Prevent default form submission
 
                 const name = document.getElementById('name').value;
-                // const email = document.getElementById('email').value; // Removed
+                const email = document.getElementById('email').value; // Re-added
                 const message = document.getElementById('message').value;
                 const phoneNumber = '7034464621'; // Your WhatsApp number
 
                 // Construct the message
-                const whatsappMessage = `Hello Surabhi Institute,\n\nI have a message from your website:\n\nName: ${name}\n\nMessage:\n${message}`; // Email removed
+                const whatsappMessage = `Hello Surabhi Institute,\n\nI have a message from your website:\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`; // Email re-added
 
                 // Encode the message for URL
                 const encodedMessage = encodeURIComponent(whatsappMessage);
@@ -504,7 +501,7 @@
         document.getElementById('submitApplicationWhatsappBtn').addEventListener('click', function(e) {
             e.preventDefault();
             const appName = document.getElementById('appName').value;
-            // const appEmail = document.getElementById('appEmail').value; // Removed
+            const appEmail = document.getElementById('appEmail').value; // Re-added
             const appCountryCode = document.getElementById('appCountryCode').value;
             const appPhone = document.getElementById('appPhone').value;
             const appCourse = document.getElementById('appCourse').value;
@@ -514,7 +511,7 @@
 
             const whatsappMessage = `*New Course Application*\n\n` +
                                     `Full Name: ${appName}\n` +
-                                    // `Email: ${appEmail}\n` + // Removed
+                                    `Email: ${appEmail}\n` + // Re-added
                                     `Phone: ${appCountryCode}${appPhone}\n` + // Include country code
                                     `Course of Interest: ${appCourse}\n` +
                                     `Educational Qualification: ${appEducation}\n` + // Updated label
