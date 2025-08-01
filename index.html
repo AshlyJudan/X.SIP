@@ -46,6 +46,23 @@
                 flex-direction: row; /* Change to row for larger screens */
             }
         }
+
+        /* Styles for the new interactive shape animation container */
+        #shape-animation-container {
+            width: 100%;
+            height: 350px; /* Scaled height for the 3D scene */
+            max-width: 600px; /* Reduced max-width for a more compact frame */
+            margin: 0 auto;
+            border: 2px solid #6b7280; /* Gray border for a frame effect */
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        #shape-animation-canvas {
+            width: 100%;
+            height: 100%;
+            background-color: transparent; /* Makes the canvas transparent to show container color */
+            display: block; /* Removes default inline spacing */
+        }
     </style>
 </head>
 <body class="text-gray-100">
@@ -56,7 +73,6 @@
 
         <div class="container mx-auto header-content-container">
             <!-- Title with "Surabhi" in big letters and "Institution of PYTHA CAD" as title -->
-            <!-- Adjusted text sizes for responsiveness and removed pl-4 for mobile centering -->
             <h1 class="font-bold mb-2 sm:mb-0 text-center sm:text-left">
                 <span class="text-4xl sm:text-5xl block leading-none">Surabhi</span>
                 <span class="text-base sm:text-xl block leading-none">Institute of PYTHA CAD</span>
@@ -92,7 +108,9 @@
         <div class="container mx-auto text-center">
             <!-- Adjusted text sizes for responsiveness -->
             <h3 class="text-3xl sm:text-4xl font-bold text-yellow-400 mb-10">About Surabhi Institute</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <!-- Flex container for the two-column layout on medium screens and up -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-7xl mx-auto">
+                <!-- Text Content for About Us -->
                 <div class="text-left">
                     <p class="text-base sm:text-lg text-gray-300 leading-relaxed mb-6">
                         Surabhi Institute of PYTHA CAD is a premier training center dedicated to empowering aspiring designers and professionals with cutting-edge skills in 3D CAD using PYTHA software. Backed by Surabhi Decor, a leading name in interior design and manufacturing, our institute blends real-world industry experience with expert-led training to ensure students gain both technical proficiency and practical insight.
@@ -101,9 +119,9 @@
                         Our mission is to bridge the gap between education and industry by providing hands-on, project-based learning, mentorship from experienced professionals, and placement assistance. Whether you're a student, architect, designer, or entrepreneur, we help you unlock your creative potential and build a successful career in 3D design with PYTHA CAD.
                     </p>
                 </div>
-                <div class="flex justify-center">
-                    <!-- Image for About Us section - Replaced placeholder with a relevant image URL -->
-                    <img src="https://placehold.co/600x400/374151/ffffff?text=Surabhi+Institute" alt="Surabhi Institute Building">
+                <!-- Container for the interactive shape animation -->
+                <div id="shape-animation-container">
+                    <canvas id="shape-animation-canvas"></canvas>
                 </div>
             </div>
         </div>
@@ -221,44 +239,40 @@
             });
         });
 
-        // Canvas animation for the header background
+        // This script block handles the header canvas animation and the new interactive shapes
         window.onload = function() {
+            // --- Header Sketch Animation ---
             const canvas = document.getElementById('logoCanvas');
             const ctx = canvas.getContext('2d');
 
-            // Set canvas dimensions to match the header
             function setCanvasDimensions() {
                 canvas.width = canvas.offsetWidth;
                 canvas.height = canvas.offsetHeight;
             }
-            setCanvasDimensions(); // Set initially
+            setCanvasDimensions();
 
-            // Define shapes: triangle, square, circle
             const shapes = [];
-            const numShapes = 4; // Number of each shape
+            const numShapes = 4;
 
-            // Function to generate a random shape
             function createRandomShape(type) {
                 return {
                     type: type,
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    size: Math.random() * 15 + 10, // Random size between 10 and 25
-                    vx: (Math.random() - 0.5) * 2, // Random velocity between -1 and 1
-                    vy: (Math.random() - 0.5) * 2  // Random velocity between -1 and 1
+                    size: Math.random() * 15 + 10,
+                    vx: (Math.random() - 0.5) * 2,
+                    vy: (Math.random() - 0.5) * 2
                 };
             }
 
-            // Populate the shapes array
             for (let i = 0; i < numShapes; i++) {
                 shapes.push(createRandomShape('triangle'));
                 shapes.push(createRandomShape('square'));
                 shapes.push(createRandomShape('circle'));
             }
 
-            // Set drawing style for "white pen" sketch
-            ctx.strokeStyle = '#FFFFFF'; // White color
-            ctx.lineWidth = 1; // Thin line for sketch effect
+            ctx.strokeStyle = '#FFFFFF';
+            ctx.lineWidth = 1;
 
             function drawShape(shape) {
                 ctx.beginPath();
@@ -276,91 +290,199 @@
                 ctx.stroke();
             }
 
-            function animate() {
+            function animateHeaderCanvas() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-
                 shapes.forEach(shape => {
+                    shape.x += shape.vx;
+                    shape.y += shape.vy;
+                    if (shape.type === 'circle') {
+                        if (shape.x + shape.size > canvas.width) { shape.x = canvas.width - shape.size; shape.vx *= -1; }
+                        else if (shape.x - shape.size < 0) { shape.x = shape.size; shape.vx *= -1; }
+                        if (shape.y + shape.size > canvas.height) { shape.y = canvas.height - shape.size; shape.vy *= -1; }
+                        else if (shape.y - shape.size < 0) { shape.y = shape.size; shape.vy *= -1; }
+                    } else if (shape.type === 'square') {
+                        if (shape.x + shape.size / 2 > canvas.width) { shape.x = canvas.width - shape.size / 2; shape.vx *= -1; }
+                        else if (shape.x - shape.size / 2 < 0) { shape.x = shape.size / 2; shape.vx *= -1; }
+                        if (shape.y + shape.size / 2 > canvas.height) { shape.y = canvas.height - shape.size / 2; shape.vy *= -1; }
+                        else if (shape.y - shape.size / 2 < 0) { shape.y = shape.size / 2; shape.vy *= -1; }
+                    } else if (shape.type === 'triangle') {
+                        const h = shape.size * (Math.sqrt(3) / 2);
+                        if (shape.x + shape.size / 2 > canvas.width) { shape.x = canvas.width - shape.size / 2; shape.vx *= -1; }
+                        else if (shape.x - shape.size / 2 < 0) { shape.x = shape.size / 2; shape.vx *= -1; }
+                        if (shape.y + h / 2 > canvas.height) { shape.y = canvas.height - h / 2; shape.vy *= -1; }
+                        else if (shape.y - h / 2 < 0) { shape.y = h / 2; shape.vy *= -1; }
+                    }
+                    drawShape(shape);
+                });
+                requestAnimationFrame(animateHeaderCanvas);
+            }
+            animateHeaderCanvas();
+
+
+            // --- New Interactive Shapes Logic ---
+            const shapeAnimationContainer = document.getElementById('shape-animation-container');
+            const shapeAnimationCanvas = document.getElementById('shape-animation-canvas');
+            const shapeCtx = shapeAnimationCanvas.getContext('2d');
+
+            let mouse = { x: null, y: null };
+            let repulsionRadius = 100;
+            let repulsionStrength = 1.0;
+            let dampingFactor = 0.95;
+            let bounceFactor = -0.8;
+
+            function resizeCanvas() {
+                shapeAnimationCanvas.width = shapeAnimationContainer.clientWidth;
+                shapeAnimationCanvas.height = shapeAnimationContainer.clientHeight;
+                initShapes(); // Re-initialize shapes on resize to fit the new dimensions
+            }
+
+            // Shapes array
+            let animatedShapes = [];
+
+            function createShape(type) {
+                return {
+                    type: type,
+                    x: Math.random() * shapeAnimationCanvas.width,
+                    y: Math.random() * shapeAnimationCanvas.height,
+                    size: Math.random() * 20 + 30, // Larger shapes for better visibility
+                    vx: 0,
+                    vy: 0
+                };
+            }
+
+            function initShapes() {
+                animatedShapes = [];
+                animatedShapes.push(createShape('rectangle'));
+                animatedShapes.push(createShape('triangle'));
+                animatedShapes.push(createShape('circle'));
+            }
+            
+            // Draw function for the new shapes
+            function drawAnimatedShape(shape) {
+                shapeCtx.fillStyle = '#fde047'; // A nice yellow color
+                shapeCtx.beginPath();
+                if (shape.type === 'rectangle') {
+                    shapeCtx.fillRect(shape.x - shape.size / 2, shape.y - shape.size / 2, shape.size, shape.size);
+                } else if (shape.type === 'triangle') {
+                    const h = shape.size * (Math.sqrt(3) / 2);
+                    shapeCtx.moveTo(shape.x, shape.y - h / 2);
+                    shapeCtx.lineTo(shape.x - shape.size / 2, shape.y + h / 2);
+                    shapeCtx.lineTo(shape.x + shape.size / 2, shape.y + h / 2);
+                    shapeCtx.closePath();
+                    shapeCtx.fill();
+                } else if (shape.type === 'circle') {
+                    shapeCtx.arc(shape.x, shape.y, shape.size / 2, 0, Math.PI * 2);
+                    shapeCtx.fill();
+                }
+            }
+
+            // Animation loop for the interactive shapes
+            function animateShapes() {
+                shapeCtx.clearRect(0, 0, shapeAnimationCanvas.width, shapeAnimationCanvas.height);
+
+                animatedShapes.forEach(shape => {
+                    // Repulsion logic based on mouse position
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const dx = shape.x - mouse.x;
+                        const dy = shape.y - mouse.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < repulsionRadius) {
+                            const forceDirectionX = dx / distance;
+                            const forceDirectionY = dy / distance;
+                            const force = (repulsionRadius - distance) / repulsionRadius * repulsionStrength;
+                            shape.vx += forceDirectionX * force;
+                            shape.vy += forceDirectionY * force;
+                        }
+                    }
+
+                    // Repulsion logic between shapes
+                    animatedShapes.forEach(otherShape => {
+                        // Don't check for collision with self
+                        if (shape === otherShape) return;
+
+                        const dx = shape.x - otherShape.x;
+                        const dy = shape.y - otherShape.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        const minDistance = shape.size / 2 + otherShape.size / 2;
+
+                        if (distance < minDistance) {
+                            // Collision detected, apply repulsion
+                            const forceDirectionX = dx / distance;
+                            const forceDirectionY = dy / distance;
+                            const force = (minDistance - distance) / minDistance * 0.5; // A smaller repulsion strength between shapes
+                            
+                            // Apply force to both shapes
+                            shape.vx += forceDirectionX * force;
+                            shape.vy += forceDirectionY * force;
+                            otherShape.vx -= forceDirectionX * force;
+                            otherShape.vy -= forceDirectionY * force;
+                        }
+                    });
+
+                    // Apply damping to slow down the shapes
+                    shape.vx *= dampingFactor;
+                    shape.vy *= dampingFactor;
+
                     // Update position
                     shape.x += shape.vx;
                     shape.y += shape.vy;
 
-                    // Boundary collision detection and repositioning
-                    if (shape.type === 'circle') {
-                        if (shape.x + shape.size > canvas.width) {
-                            shape.x = canvas.width - shape.size;
-                            shape.vx *= -1;
-                        } else if (shape.x - shape.size < 0) {
-                            shape.x = shape.size;
-                            shape.vx *= -1;
-                        }
-                        if (shape.y + shape.size > canvas.height) {
-                            shape.y = canvas.height - shape.size;
-                            shape.vy *= -1;
-                        } else if (shape.y - shape.size < 0) {
-                            shape.y = shape.size;
-                            shape.vy *= -1;
-                        }
-                    } else if (shape.type === 'square') {
-                        if (shape.x + shape.size / 2 > canvas.width) {
-                            shape.x = canvas.width - shape.size / 2;
-                            shape.vx *= -1;
-                        } else if (shape.x - shape.size / 2 < 0) {
-                            shape.x = shape.size / 2;
-                            shape.vx *= -1;
-                        }
-                        if (shape.y + shape.size / 2 > canvas.height) {
-                            shape.y = canvas.height - shape.size / 2;
-                            shape.vy *= -1;
-                        } else if (shape.y - shape.size / 2 < 0) {
-                            shape.y = shape.size / 2;
-                            shape.vy *= -1;
-                        }
-                    } else if (shape.type === 'triangle') {
-                        const h = shape.size * (Math.sqrt(3) / 2);
-                        if (shape.x + shape.size / 2 > canvas.width) {
-                            shape.x = canvas.width - shape.size / 2;
-                            shape.vx *= -1;
-                        } else if (shape.x - shape.size / 2 < 0) {
-                            shape.x = shape.size / 2;
-                            shape.vx *= -1;
-                        }
-                        if (shape.y + h / 2 > canvas.height) {
-                            shape.y = canvas.height - h / 2;
-                            shape.vy *= -1;
-                        } else if (shape.y - h / 2 < 0) {
-                            shape.y = h / 2;
-                            shape.vy *= -1;
-                        }
+                    // Boundary collision detection and bounce
+                    const size = shape.size / 2;
+                    if (shape.x - size < 0 || shape.x + size > shapeAnimationCanvas.width) {
+                        shape.vx *= bounceFactor;
+                        // Correct position to prevent getting stuck
+                        if (shape.x - size < 0) shape.x = size;
+                        else if (shape.x + size > shapeAnimationCanvas.width) shape.x = shapeAnimationCanvas.width - size;
                     }
-                    drawShape(shape);
-                });
-                requestAnimationFrame(animate);
-            }
-            animate();
+                    if (shape.y - size < 0 || shape.y + size > shapeAnimationCanvas.height) {
+                        shape.vy *= bounceFactor;
+                        // Correct position
+                        if (shape.y - size < 0) shape.y = size;
+                        else if (shape.y + size > shapeAnimationCanvas.height) shape.y = shapeAnimationCanvas.height - size;
+                    }
 
-            // Original Contact Form WhatsApp Integration (only WhatsApp remains)
+                    drawAnimatedShape(shape);
+                });
+
+                requestAnimationFrame(animateShapes);
+            }
+
+            // Mouse move listener to update mouse position
+            shapeAnimationContainer.addEventListener('mousemove', (e) => {
+                const rect = shapeAnimationCanvas.getBoundingClientRect();
+                mouse.x = e.clientX - rect.left;
+                mouse.y = e.clientY - rect.top;
+            });
+
+            shapeAnimationContainer.addEventListener('mouseleave', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
+
+            // Handle window resizing
+            window.addEventListener('resize', resizeCanvas);
+            
+            // Initial setup
+            resizeCanvas();
+            animateShapes();
+
+
+            // --- Contact Form WhatsApp Integration ---
             const sendWhatsappBtn = document.getElementById('sendWhatsappBtn');
             sendWhatsappBtn.addEventListener('click', function(e) {
-                e.preventDefault(); // Prevent default form submission
+                e.preventDefault();
 
                 const name = document.getElementById('name').value;
                 const email = document.getElementById('email').value;
                 const message = document.getElementById('message').value;
-                const phoneNumber = '7034464621'; // Your WhatsApp number
+                const phoneNumber = '7034464621';
 
-                // Construct the message
                 const whatsappMessage = `Hello Surabhi Institute,\n\nI have a message from your website:\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
-
-                // Encode the message for URL
                 const encodedMessage = encodeURIComponent(whatsappMessage);
-
-                // Create the WhatsApp URL
                 const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-
-                // Open WhatsApp
                 window.open(whatsappUrl, '_blank');
-
-                // Optionally, clear the form after opening WhatsApp
                 document.getElementById('contactForm').reset();
             });
         };
