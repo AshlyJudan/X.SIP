@@ -7,12 +7,12 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Georgia&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- jsPDF CDN for generating PDFs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Inter', sans-serif;
             background-color: #0d1117;
             background-image: radial-gradient(#2f3946 1px, transparent 1px);
             background-size: 20px 20px;
@@ -21,7 +21,14 @@
             max-width: 800px;
         }
         input:focus, select:focus, textarea:focus {
+            outline: none;
             box-shadow: 0 0 0 3px rgba(253, 224, 71, 0.5); /* A softer, glowing yellow shadow */
+            border-color: #fde047;
+        }
+        /* Style for the custom modal backdrop */
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
         }
     </style>
 </head>
@@ -72,7 +79,6 @@
                     <div>
                         <label for="country" class="block text-gray-300 text-sm font-medium mb-1">Country</label>
                         <select id="country" name="country" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
-                            <!-- List of countries will be populated here -->
                             <option value="India" selected>India</option>
                             <option value="United States">United States</option>
                             <option value="United Kingdom">United Kingdom</option>
@@ -90,7 +96,6 @@
                             <option value="Russia">Russia</option>
                             <option value="Saudi Arabia">Saudi Arabia</option>
                             <option value="United Arab Emirates">United Arab Emirates</option>
-                            <!-- You can add more countries as needed -->
                         </select>
                     </div>
                 </div>
@@ -106,7 +111,45 @@
                         </div>
                         <div>
                             <label for="state" class="block text-gray-300 text-sm font-medium mb-1">State</label>
-                            <input type="text" id="state" name="state" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
+                            <select id="state" name="state" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
+                                <option value="">Select a state</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala" selected>Kerala</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Nagaland">Nagaland</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="West Bengal">West Bengal</option>
+                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                <option value="Ladakh">Ladakh</option>
+                                <option value="Lakshadweep">Lakshadweep</option>
+                                <option value="Puducherry">Puducherry</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -162,10 +205,30 @@
         </form>
     </div>
 
+    <!-- Custom Message Modal -->
+    <div id="messageModal" class="fixed inset-0 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-gray-800 rounded-lg p-6 shadow-2xl max-w-sm w-full border border-gray-700">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="modalTitle" class="text-xl font-bold text-yellow-400">Message</h3>
+                <button id="closeModalBtn" class="text-gray-400 hover:text-gray-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <p id="modalMessage" class="text-gray-300 mb-4"></p>
+            <div class="flex justify-end">
+                <button onclick="document.getElementById('messageModal').classList.add('hidden')" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-semibold py-2 px-4 rounded-md">
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Use an IIFE to encapsulate the script
+        // Use an IIFE (Immediately Invoked Function Expression) to encapsulate the script and avoid global variables.
         (function() {
-            // Function to get query parameters
+            // Function to get query parameters from the URL.
             function getQueryParams() {
                 const params = {};
                 window.location.search.substring(1).split('&').forEach(param => {
@@ -177,19 +240,39 @@
                 return params;
             }
 
-            // Pre-fill course if present in the URL
+            // Pre-fill the course selection if a 'course' query parameter is present in the URL.
             const queryParams = getQueryParams();
             if (queryParams.course) {
                 document.getElementById('course').value = queryParams.course;
             }
 
-            // Get form elements
+            // Get references to all the important form elements and buttons.
             const form = document.getElementById('applicationForm');
             const downloadBtn = document.getElementById('downloadPdfBtn');
             const sendBtn = document.getElementById('sendApplicationBtn');
             const agreementCheckbox = document.getElementById('agreement');
 
-            // Function to collect form data
+            // Get references to the custom modal elements.
+            const messageModal = document.getElementById('messageModal');
+            const modalMessage = document.getElementById('modalMessage');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+
+            /**
+             * Shows a custom message modal with the given message.
+             * This replaces the use of `alert()` for a better user experience.
+             * @param {string} message The message to display in the modal.
+             */
+            function showMessage(message) {
+                modalMessage.textContent = message;
+                messageModal.classList.remove('hidden');
+            }
+
+            // Event listener for the modal close button.
+            closeModalBtn.addEventListener('click', () => {
+                messageModal.classList.add('hidden');
+            });
+            
+            // Function to collect all form data into a single object.
             function getFormData() {
                 return {
                     firstName: document.getElementById('firstName').value,
@@ -208,18 +291,27 @@
                 };
             }
 
-            // Function to create and download PDF
+            /**
+             * Creates and downloads a PDF of the application form data.
+             * It first validates the form and agreement checkbox.
+             * @param {object} data The form data to include in the PDF.
+             * @returns {boolean} True if the PDF was generated successfully, false otherwise.
+             */
             function createAndDownloadPdf(data) {
-                if (!agreementCheckbox.checked) {
-                    alert('Please agree that the information is correct.');
-                    return;
-                }
-
+                // Check if the form's required fields are filled out.
                 if (!form.checkValidity()) {
+                    // Show validation messages built into the browser.
                     form.reportValidity();
-                    return;
+                    return false;
+                }
+                
+                // Check if the agreement checkbox is checked.
+                if (!agreementCheckbox.checked) {
+                    showMessage('Please agree that the information is correct.');
+                    return false;
                 }
 
+                // Proceed with PDF generation using jsPDF.
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
                 const margin = 20;
@@ -228,29 +320,29 @@
                 const pageWidth = doc.internal.pageSize.getWidth();
                 
                 // --- Header Section ---
-                doc.setFillColor(30, 41, 59); // Dark blue background
+                doc.setFillColor(30, 41, 59);
                 doc.rect(0, 0, pageWidth, 30, "F");
                 
                 doc.setFontSize(20);
-                doc.setTextColor(255, 255, 255); // White text
+                doc.setTextColor(255, 255, 255);
                 doc.setFont("helvetica", "bold");
                 doc.text("Surabhi Institute of Pytha CAD", pageWidth / 2, 15, { align: "center" });
 
                 doc.setFontSize(12);
-                doc.setTextColor(203, 213, 225); // Light gray text
+                doc.setTextColor(203, 213, 225);
                 doc.setFont("helvetica", "normal");
                 doc.text("Course Application Form", pageWidth / 2, 23, { align: "center" });
                 
-                doc.setDrawColor(253, 224, 71); // Yellow color for the line
+                doc.setDrawColor(253, 224, 71);
                 doc.setLineWidth(1);
                 doc.line(margin, 30, pageWidth - margin, 30);
                 
                 yPosition = 40;
 
-                // Helper function to add a section with a formatted title
+                // Helper function to add a section with a formatted title.
                 function addSectionTitle(title) {
                     doc.setFontSize(16);
-                    doc.setTextColor(253, 224, 71); // Tailwind's yellow-400
+                    doc.setTextColor(253, 224, 71);
                     doc.setFont("helvetica", "bold");
                     doc.text(title, margin, yPosition);
                     yPosition += 8;
@@ -260,38 +352,35 @@
                     yPosition += 8;
                 }
 
-                // Helper function to add a key-value pair in a structured box
+                // Helper function to add a key-value pair in a structured box.
                 function addKeyValuePair(label, value) {
                     const rowHeight = 15;
                     const labelWidth = 60;
                     const valueX = margin + labelWidth;
 
-                    // Check for new page
                     if (yPosition + rowHeight > pageHeight - margin) {
                         doc.addPage();
                         yPosition = margin;
                     }
 
-                    // Draw the box for the detail, now with a white background and gray border
-                    doc.setFillColor(255, 255, 255); // White background
+                    // Fill the rectangle with a light gray color
+                    doc.setFillColor(245, 245, 245);
                     doc.rect(margin, yPosition, pageWidth - (margin * 2), rowHeight, "F");
-                    doc.setDrawColor(107, 114, 128); // Gray border (Tailwind's gray-500)
+                    doc.setDrawColor(107, 114, 128);
                     doc.rect(margin, yPosition, pageWidth - (margin * 2), rowHeight, "S");
 
                     doc.setFontSize(10);
                     doc.setFont("helvetica", "bold");
-                    doc.setTextColor(0, 0, 0); // Black text
+                    doc.setTextColor(0, 0, 0);
                     doc.text(label, margin + 2, yPosition + (rowHeight / 2) + 2, {
                         align: "left",
                         baseline: "middle"
                     });
                     
                     doc.setFont("helvetica", "normal");
-                    doc.setTextColor(0, 0, 0); // Black text
+                    doc.setTextColor(0, 0, 0);
                     
                     const valueText = doc.splitTextToSize(value, pageWidth - (margin * 2) - labelWidth - 5);
-                    const valueTextHeight = (valueText.length - 1) * doc.getLineHeight() + doc.getLineHeight();
-                    
                     doc.text(valueText, valueX + 2, yPosition + (rowHeight / 2) + 2, {
                         align: "left",
                         baseline: "middle"
@@ -310,59 +399,59 @@
                 addKeyValuePair("Pincode:", data.pincode);
                 addKeyValuePair("State:", data.state);
                 addKeyValuePair("Country:", data.country);
-                yPosition += 10; // Add space between sections
+                yPosition += 10;
 
                 // --- Section 2: Course Details ---
                 addSectionTitle("2. Course Details");
                 addKeyValuePair("Course:", data.course);
                 addKeyValuePair("Preferred Batch:", data.batch);
                 addKeyValuePair("Has Laptop:", data.laptop);
-                yPosition += 10; // Add space between sections
+                yPosition += 10;
+
+                // --- Note Section ---
+                doc.setFontSize(9); // "more small"
+                doc.setTextColor(107, 114, 128); // "grey"
+                doc.setFont("helvetica", "normal");
+                const noteText = "Please check if the above details are correct and send the downloaded form to our WhatsApp number.";
+                const noteTextLines = doc.splitTextToSize(noteText, pageWidth - (margin * 2));
+                doc.text(noteTextLines, margin, yPosition); // Aligned to the left
+                yPosition += (noteTextLines.length * 5) + 10;
                 
                 // --- Footer ---
-                doc.setDrawColor(107, 114, 128); // Tailwind's gray-500
+                doc.setDrawColor(107, 114, 128);
                 doc.setLineWidth(0.5);
                 doc.line(margin, pageHeight - 20, pageWidth - margin, pageHeight - 20);
                 
                 doc.setFontSize(10);
-                doc.setTextColor(156, 163, 175); // Lighter gray
+                doc.setTextColor(156, 163, 175);
                 doc.text("Surabhi Institute of Pytha CAD | Ph: 7034464621 | Email: ashly.pyo@gmail.com", pageWidth / 2, pageHeight - 10, { align: "center" });
 
                 doc.save(`Application_${data.firstName}_${data.lastName}.pdf`);
+                
+                return true;
             }
 
-            // Event listener for Download button
+            // Event listener for the "Download Application" button.
             downloadBtn.addEventListener('click', () => {
                 const data = getFormData();
                 createAndDownloadPdf(data);
             });
 
-            // Event listener for Send button (WhatsApp)
+            // Event listener for the "Send Application" button (WhatsApp).
             sendBtn.addEventListener('click', () => {
                 const data = getFormData();
-                if (!agreementCheckbox.checked) {
-                    alert('Please agree that the information is correct.');
-                    return;
+                if (createAndDownloadPdf(data)) {
+                    // Prepare the WhatsApp message.
+                    const phoneNumber = '7034464621';
+                    const whatsappMessage = `Hello Surabhi Institute,\n\nI have just submitted my application form. Please find the attached PDF.\n\nThank you,\n${data.firstName} ${data.lastName}`;
+                    const encodedMessage = encodeURIComponent(whatsappMessage);
+                    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+                    // Open WhatsApp in a new tab after a short delay to allow the PDF to finish downloading.
+                    setTimeout(() => {
+                        window.open(whatsappUrl, '_blank');
+                    }, 1000);
                 }
-
-                if (!form.checkValidity()) {
-                    form.reportValidity();
-                    return;
-                }
-
-                // First, create the PDF
-                createAndDownloadPdf(data);
-
-                // Then, prepare the WhatsApp message. Cannot attach files via URL, so we prompt the user.
-                const phoneNumber = '7034464621';
-                const whatsappMessage = `Hello Surabhi Institute,\n\nI have just submitted my application form. Please find the attached PDF.\n\nThank you,\n${data.firstName} ${data.lastName}`;
-                const encodedMessage = encodeURIComponent(whatsappMessage);
-                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-
-                // Open WhatsApp after a short delay to allow for PDF download
-                setTimeout(() => {
-                    window.open(whatsappUrl, '_blank');
-                }, 1000);
             });
         })();
     </script>
