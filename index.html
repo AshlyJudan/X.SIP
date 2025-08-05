@@ -1,3 +1,7 @@
+<!-- This is a self-contained HTML document for the Surabhi Institute website. -->
+<!-- It uses Tailwind CSS for styling to create a responsive and modern layout. -->
+<!-- The color theme is a golden accent (#D1AF60) on a light gray/white palette, with a dark header and footer. -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,24 +10,24 @@
     <title>Surabhi Institute of Pytha CAD</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Using a common serif font as Nexa Serif is not freely freely available via CDN -->
+    <!-- Google Fonts - Georgia is a good, classic serif font. -->
     <link href="https://fonts.googleapis.com/css2?family=Georgia&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Georgia', serif; /* Changed font to Georgia, with generic serif fallback */
-            background-color: #1a202c; /* Dark background for the body - equivalent to gray-900 */
+            font-family: 'Georgia', serif;
+            background-color: #ffffff; /* White background for the overall page */
         }
-        /* Optional: Add smooth scroll behavior for the entire document for fallback */
+        /* Optional: Add smooth scroll behavior for the entire document */
         html {
             scroll-behavior: smooth;
         }
         /* Header styles for positioning the canvas */
         header {
-            position: relative; /* Crucial for absolute positioning of the canvas child */
-            overflow: hidden; /* Ensures shapes don't go outside the header bounds */
+            position: relative;
+            overflow: hidden;
         }
         #logoCanvas {
-            position: absolute; /* Position over the entire header area */
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
@@ -32,90 +36,88 @@
         }
         /* Ensure the main content of the header (title, nav) appears above the canvas */
         .header-content-container {
-            position: relative; /* Gives it a z-index context */
-            z-index: 1; /* Higher z-index than the canvas */
-            display: flex; /* Make it a flex container */
-            flex-direction: column; /* Default to column for small screens */
-            justify-content: space-between; /* Space out title and nav */
-            align-items: center; /* Center items vertically */
-            width: 100%; /* Ensure it spans the container */
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
         }
         /* For medium and larger screens, make it a row and align items */
         @media (min-width: 640px) { /* Tailwind's sm breakpoint */
             .header-content-container {
-                flex-direction: row; /* Change to row for larger screens */
+                flex-direction: row;
             }
         }
-
         /* Styles for the new interactive shape animation container */
         #shape-animation-container {
             width: 100%;
-            height: 350px; /* Scaled height for the 3D scene */
-            max-width: 600px; /* Reduced max-width for a more compact frame */
+            height: 350px;
+            max-width: 600px;
             margin: 0 auto;
-            border: 2px solid #6b7280; /* Gray border for a frame effect */
+            border: 2px solid #e5e7eb; /* Light gray border */
             border-radius: 10px;
             overflow: hidden;
         }
         #shape-animation-canvas {
             width: 100%;
             height: 100%;
-            background-color: transparent; /* Makes the canvas transparent to show container color */
-            display: block; /* Removes default inline spacing */
+            background-color: transparent;
+            display: block;
         }
     </style>
 </head>
-<body class="text-gray-100">
+<body class="text-gray-800">
     <!-- Header Section -->
-    <header class="bg-black text-yellow-400 shadow-lg py-6 px-4 sm:px-6 lg:px-8 rounded-b-lg">
+    <header class="bg-black text-white shadow-lg py-6 px-4 sm:px-6 lg:px-8 rounded-b-lg">
         <!-- Canvas for animated sketch drawing, now full-size and behind content -->
         <canvas id="logoCanvas"></canvas>
 
         <div class="container mx-auto header-content-container">
             <!-- Title with "Surabhi" in big letters and "Institution of PYTHA CAD" as title -->
             <h1 class="font-bold mb-2 sm:mb-0 text-center sm:text-left">
-                <span class="text-4xl sm:text-5xl block leading-none">Surabhi</span>
-                <span class="text-base sm:text-xl block leading-none">Institute of PYTHA CAD</span>
+                <span class="text-4xl sm:text-5xl block leading-none" style="color: #D1AF60;">Surabhi</span>
+                <span class="text-base sm:text-xl block leading-none" style="color: #D1AF60;">Institute of PYTHA CAD</span>
             </h1>
             <nav>
                 <ul class="flex space-x-6">
-                    <li><a href="#about" class="hover:text-yellow-200 transition duration-300">About Us</a></li>
-                    <li><a href="#courses" class="hover:text-yellow-200 transition duration-300">Courses</a></li>
-                    <li><a href="#contact" class="hover:text-yellow-200 transition duration-300">Contact</a></li>
-                    <!-- New "PYTHA" link -->
-                    <li><a href="https://www.pytha.com/" target="_blank" class="hover:text-yellow-200 transition duration-300">PYTHA</a></li>
+                    <li><a href="#about" class="hover:text-[#B5944B] transition duration-300">About Us</a></li>
+                    <li><a href="#courses" class="hover:text-[#B5944B] transition duration-300">Courses</a></li>
+                    <li><a href="#contact" class="hover:text-[#B5944B] transition duration-300">Contact</a></li>
+                    <li><a href="https://www.pytha.com/" target="_blank" class="hover:text-[#B5944B] transition duration-300">PYTHA</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="relative bg-gray-800 py-20 px-4 sm:px-6 lg:px-8 shadow-md rounded-lg mx-4 mt-8">
+    <section class="relative py-20 px-4 sm:px-6 lg:px-8 shadow-md rounded-lg mx-4 mt-8 bg-gray-100">
         <div class="container mx-auto text-center">
             <!-- Adjusted text sizes for responsiveness -->
-            <h2 class="text-3xl sm:text-5xl font-extrabold text-yellow-400 mb-6">Empowering Your Design Future</h2>
-            <p class="text-lg sm:text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-gray-900" style="color: #D1AF60;">Empowering Your Design Future</h2>
+            <p class="text-lg sm:text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
                 Whether you're designing beautiful spaces or crafting them with precision, PYTHA helps you bring ideas to life. Easy to learn and powerful to use, it's the perfect tool to connect creativity with hands-on work.
             </p>
-            <a href="#courses" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+            <a href="#courses" class="inline-block bg-[#D1AF60] hover:bg-[#B5944B] text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
                 Explore Our Courses
             </a>
         </div>
     </section>
 
     <!-- About Us Section -->
-    <section id="about" class="py-16 px-4 sm:px-6 lg:px-8">
+    <section id="about" class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div class="container mx-auto text-center">
             <!-- Adjusted text sizes for responsiveness -->
-            <h3 class="text-3xl sm:text-4xl font-bold text-yellow-400 mb-10">About Surabhi Institute</h3>
+            <h3 class="text-3xl sm:text-4xl font-bold text-gray-900" style="color: #D1AF60;">About Surabhi Institute</h3>
             <!-- Flex container for the two-column layout on medium screens and up -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-7xl mx-auto">
                 <!-- Text Content for About Us -->
                 <div class="text-left">
-                    <p class="text-base sm:text-lg text-gray-300 leading-relaxed mb-6">
+                    <p class="text-base sm:text-lg text-gray-600 leading-relaxed mb-6">
                         Surabhi Institute of PYTHA CAD is a premier training center dedicated to empowering aspiring designers and professionals with cutting-edge skills in 3D CAD using PYTHA software. Backed by Surabhi Decor, a leading name in interior design and manufacturing, our institute blends real-world industry experience with expert-led training to ensure students gain both technical proficiency and practical insight.
                     </p>
-                    <p class="text-base sm:text-lg text-gray-300 leading-relaxed">
+                    <p class="text-base sm:text-lg text-gray-600 leading-relaxed">
                         Our mission is to bridge the gap between education and industry by providing hands-on, project-based learning, mentorship from experienced professionals, and placement assistance. Whether you're a student, architect, designer, or entrepreneur, we help you unlock your creative potential and build a successful career in 3D design with PYTHA CAD.
                     </p>
                 </div>
@@ -128,16 +130,16 @@
     </section>
 
     <!-- Courses Section -->
-    <section id="courses" class="bg-gray-900 py-16 px-4 sm:px-6 lg:px-8 rounded-lg mx-4">
+    <section id="courses" class="bg-gray-100 py-16 px-4 sm:px-6 lg:px-8 rounded-lg mx-4">
         <div class="container mx-auto text-center">
             <!-- Adjusted text sizes for responsiveness -->
-            <h3 class="text-3xl sm:text-4xl font-bold text-yellow-400 mb-12">Our Core Courses</h3>
+            <h3 class="text-3xl sm:text-4xl font-bold text-gray-900" style="color: #D1AF60;">Our Core Courses</h3>
             <!-- Changed grid classes for centering -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center">
                 <!-- Course Card 1: Pytha Modeller Pack (Advanced) -->
-                <div class="bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 flex flex-col">
-                    <h4 class="text-xl sm:text-2xl font-semibold text-yellow-400 mb-4">Pytha Modeller Pack (Advanced)</h4>
-                    <ul class="text-left text-gray-300 list-disc list-inside mb-6 flex-grow">
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 flex flex-col">
+                    <h4 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-4" style="color: #D1AF60;">Pytha Modeller Pack (Advanced)</h4>
+                    <ul class="text-left text-gray-600 list-disc list-inside mb-6 flex-grow">
                         <li>Understanding UI</li>
                         <li>3D Modelling</li>
                         <li>Advanced 3D Modelling</li>
@@ -154,15 +156,15 @@
                         <li>CNC Machine Integration</li>
                     </ul>
                     <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mt-auto">
-                        <a href="pytha-modeller-pack.html" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-full shadow-md transition duration-300">Learn More</a>
-                        <a href="application-form.html?course=Pytha Modeller Pack (Advanced)" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-full shadow-md transition duration-300">Apply Now</a>
+                        <a href="pytha-modeller-pack.html" class="inline-block bg-[#D1AF60] hover:bg-[#B5944B] text-white font-bold py-2 px-6 rounded-full shadow-md transition duration-300">Learn More</a>
+                        <a href="application-form.html?course=Pytha Modeller Pack (Advanced)" target="_blank" class="inline-block bg-[#D1AF60] hover:bg-[#B5944B] text-white font-bold py-2 px-6 rounded-full shadow-md transition duration-300">Apply Now</a>
                     </div>
                 </div>
 
                 <!-- Course Card 2: Pytha Planner Pack (Limited) -->
-                <div class="bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 flex flex-col">
-                    <h4 class="text-xl sm:text-2xl font-semibold text-yellow-400 mb-4">Pytha Planner Pack (Limited)</h4>
-                    <ul class="text-left text-gray-300 list-disc list-inside mb-6 flex-grow">
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 flex flex-col">
+                    <h4 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-4" style="color: #D1AF60;">Pytha Planner Pack (Limited)</h4>
+                    <ul class="text-left text-gray-600 list-disc list-inside mb-6 flex-grow">
                         <li>Understanding UI</li>
                         <li>Drag N Drop</li>
                         <li>Parts List</li>
@@ -170,8 +172,8 @@
                         <li>Rendering</li>
                     </ul>
                     <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mt-auto">
-                        <a href="pytha-planner-pack.html" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-full shadow-md transition duration-300">Learn More</a>
-                        <a href="application-form.html?course=Pytha Planner Pack (Limited)" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-full shadow-md transition duration-300">Apply Now</a>
+                        <a href="pytha-planner-pack.html" class="inline-block bg-[#D1AF60] hover:bg-[#B5944B] text-white font-bold py-2 px-6 rounded-full shadow-md transition duration-300">Learn More</a>
+                        <a href="application-form.html?course=Pytha Planner Pack (Limited)" target="_blank" class="inline-block bg-[#D1AF60] hover:bg-[#B5944B] text-white font-bold py-2 px-6 rounded-full shadow-md transition duration-300">Apply Now</a>
                     </div>
                 </div>
             </div>
@@ -179,47 +181,47 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 px-4 sm:px-6 lg:px-8">
+    <section id="contact" class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-100">
         <div class="container mx-auto text-center">
             <!-- Adjusted text sizes for responsiveness -->
-            <h3 class="text-3xl sm:text-4xl font-bold text-yellow-400 mb-10">Get in Touch</h3>
-            <div class="max-w-2xl mx-auto bg-gray-800 p-8 rounded-xl shadow-lg">
-                <p class="text-base sm:text-lg text-gray-300 mb-6">
+            <h3 class="text-3xl sm:text-4xl font-bold text-gray-900" style="color: #D1AF60;">Get in Touch</h3>
+            <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+                <p class="text-base sm:text-lg text-gray-600 mb-6">
                     Have questions or ready to enroll? Contact us today!
                 </p>
                 <form class="space-y-6" id="contactForm">
                     <div>
-                        <label for="name" class="block text-left text-gray-300 text-sm font-medium mb-2">Name</label>
-                        <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="Your Name" required>
+                        <label for="name" class="block text-left text-gray-700 text-sm font-medium mb-2">Name</label>
+                        <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-md bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#D1AF60]" placeholder="Your Name" required>
                     </div>
                     <div>
-                        <label for="email" class="block text-left text-gray-300 text-sm font-medium mb-2">Email</label>
-                        <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="your@example.com" required>
+                        <label for="email" class="block text-left text-gray-700 text-sm font-medium mb-2">Email</label>
+                        <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-md bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#D1AF60]" placeholder="your@example.com" required>
                     </div>
                     <div>
-                        <label for="message" class="block text-left text-gray-300 text-sm font-medium mb-2">Message</label>
-                        <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 text-gray-100" placeholder="Your message..." required></textarea>
+                        <label for="message" class="block text-left text-gray-700 text-sm font-medium mb-2">Message</label>
+                        <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-md bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#D1AF60]" placeholder="Your message..." required></textarea>
                     </div>
-                    <button type="button" id="sendWhatsappBtn" class="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-6 rounded-md shadow-lg transition duration-300 transform hover:scale-105">
+                    <button type="button" id="sendWhatsappBtn" class="w-full bg-[#D1AF60] hover:bg-[#B5944B] text-white font-bold py-3 px-6 rounded-md shadow-lg transition duration-300 transform hover:scale-105">
                         Send Message via WhatsApp
                     </button>
                 </form>
-                <div class="mt-8 text-gray-300 text-left">
-                    <p><strong class="text-yellow-400">Address:</strong><br>Surabhi Institute of Pytha CAD,<br>2rd Floor, Top of Surabhi Module, Edappally - Pukkattupady Rd,<br>Kakkanad, Kochi,<br>India</p>
-                    <p class="mt-2"><strong class="text-yellow-400">Phone:</strong> 7034464621</p>
-                    <p class="mt-2"><strong class="text-yellow-400">Email:</strong> ashly.pyo@gmail.com</p>
+                <div class="mt-8 text-gray-600 text-left">
+                    <p><strong style="color: #D1AF60;">Address:</strong><br>Surabhi Institute of Pytha CAD,<br>2rd Floor, Top of Surabhi Module, Edappally - Pukkattupady Rd,<br>Kakkanad, Kochi,<br>India</p>
+                    <p class="mt-2"><strong style="color: #D1AF60;">Phone:</strong> 7034464621</p>
+                    <p class="mt-2"><strong style="color: #D1AF60;">Email:</strong> ashly.pyo@gmail.com</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer Section -->
-    <footer class="bg-gray-900 text-yellow-400 py-8 px-4 sm:px-6 lg:px-8 mt-12 rounded-t-lg">
+    <footer class="bg-black text-white py-8 px-4 sm:px-6 lg:px-8 mt-12 rounded-t-lg">
         <div class="container mx-auto text-center">
             <p>&copy; 2025 Surabhi Institute of Pytha CAD. All rights reserved.</p>
             <div class="flex justify-center space-x-6 mt-4">
-                <a href="#" class="hover:text-yellow-200 transition duration-300">Privacy Policy</a>
-                <a href="#" class="hover:text-yellow-200 transition duration-300">Terms of Service</a>
+                <a href="#" class="hover:text-[#B5944B] transition duration-300">Privacy Policy</a>
+                <a href="#" class="hover:text-[#B5944B] transition duration-300">Terms of Service</a>
             </div>
         </div>
     </footer>
@@ -271,7 +273,8 @@
                 shapes.push(createRandomShape('circle'));
             }
 
-            ctx.strokeStyle = '#FFFFFF';
+            // Updated color for the animated shapes for visibility on a light background
+            ctx.strokeStyle = '#D1AF60';
             ctx.lineWidth = 1;
 
             function drawShape(shape) {
@@ -318,7 +321,6 @@
             }
             animateHeaderCanvas();
 
-
             // --- New Interactive Shapes Logic ---
             const shapeAnimationContainer = document.getElementById('shape-animation-container');
             const shapeAnimationCanvas = document.getElementById('shape-animation-canvas');
@@ -336,7 +338,6 @@
                 initShapes(); // Re-initialize shapes on resize to fit the new dimensions
             }
 
-            // Shapes array
             let animatedShapes = [];
 
             function createShape(type) {
@@ -356,10 +357,10 @@
                 animatedShapes.push(createShape('triangle'));
                 animatedShapes.push(createShape('circle'));
             }
-            
-            // Draw function for the new shapes
+
+            // Draw function for the new shapes, using the accent color
             function drawAnimatedShape(shape) {
-                shapeCtx.fillStyle = '#fde047'; // A nice yellow color
+                shapeCtx.fillStyle = '#D1AF60'; // A nice golden color
                 shapeCtx.beginPath();
                 if (shape.type === 'rectangle') {
                     shapeCtx.fillRect(shape.x - shape.size / 2, shape.y - shape.size / 2, shape.size, shape.size);
@@ -398,24 +399,19 @@
 
                     // Repulsion logic between shapes
                     animatedShapes.forEach(otherShape => {
-                        // Don't check for collision with self
                         if (shape === otherShape) return;
-
                         const dx = shape.x - otherShape.x;
                         const dy = shape.y - otherShape.y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
                         const minDistance = shape.size / 2 + otherShape.size / 2;
 
                         if (distance < minDistance) {
-                            // Collision detected, apply repulsion
                             const forceDirectionX = dx / distance;
                             const forceDirectionY = dy / distance;
-                            const force = (minDistance - distance) / minDistance * 0.5; // A smaller repulsion strength between shapes
-                            
-                            // Apply force to both shapes
+                            const force = (minDistance - distance) / minDistance * 0.5;
                             shape.vx += forceDirectionX * force;
-                            shape.vy += forceDirectionY * force;
                             otherShape.vx -= forceDirectionX * force;
+                            shape.vy += forceDirectionY * force;
                             otherShape.vy -= forceDirectionY * force;
                         }
                     });
@@ -426,23 +422,20 @@
 
                     // Update position
                     shape.x += shape.vx;
-                    shape.y += shape.vy;
+                    shape.y += shape.y;
 
                     // Boundary collision detection and bounce
                     const size = shape.size / 2;
                     if (shape.x - size < 0 || shape.x + size > shapeAnimationCanvas.width) {
                         shape.vx *= bounceFactor;
-                        // Correct position to prevent getting stuck
                         if (shape.x - size < 0) shape.x = size;
                         else if (shape.x + size > shapeAnimationCanvas.width) shape.x = shapeAnimationCanvas.width - size;
                     }
                     if (shape.y - size < 0 || shape.y + size > shapeAnimationCanvas.height) {
                         shape.vy *= bounceFactor;
-                        // Correct position
                         if (shape.y - size < 0) shape.y = size;
                         else if (shape.y + size > shapeAnimationCanvas.height) shape.y = shapeAnimationCanvas.height - size;
                     }
-
                     drawAnimatedShape(shape);
                 });
 
@@ -467,7 +460,6 @@
             // Initial setup
             resizeCanvas();
             animateShapes();
-
 
             // --- Contact Form WhatsApp Integration ---
             const sendWhatsappBtn = document.getElementById('sendWhatsappBtn');
