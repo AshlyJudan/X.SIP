@@ -13,55 +13,75 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0d1117;
-            background-image: radial-gradient(#2f3946 1px, transparent 1px);
-            background-size: 20px 20px;
+            background-color: #F8F8F8; /* Light gray background */
         }
         .container {
             max-width: 800px;
         }
         input:focus, select:focus, textarea:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(253, 224, 71, 0.5);
-            border-color: #fde047;
+            box-shadow: 0 0 0 3px rgba(209, 175, 96, 0.5); /* Golden focus ring */
+            border-color: #D1AF60;
         }
         .modal-backdrop {
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.5);
             z-index: 1000;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Custom scrollbar styles for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #E5E7EB;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D1AF60;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #C4A15A;
         }
     </style>
 </head>
-<body class="text-gray-100">
-    <div class="container mx-auto p-4 sm:p-8 bg-gray-900 rounded-2xl shadow-2xl my-8 border border-gray-700">
-        <h1 class="text-3xl sm:text-4xl font-bold text-yellow-400 mb-8 text-center tracking-wide">
+<body class="text-gray-800">
+    <div class="container mx-auto p-4 sm:p-8 bg-white rounded-2xl shadow-2xl my-8 border border-gray-300 fade-in">
+        <h1 class="text-3xl sm:text-4xl font-bold text-[#D1AF60] mb-8 text-center tracking-wide">
             Course Application Form
         </h1>
         <form id="applicationForm" class="space-y-8">
             <!-- Section 1: Personal Details -->
-            <div class="bg-gray-800 p-6 rounded-xl shadow-inner border border-gray-700">
-                <h2 class="text-xl sm:text-2xl font-semibold text-yellow-300 mb-6">1. Personal Details</h2>
+            <div class="bg-gray-50 p-6 rounded-xl shadow-inner border border-gray-200">
+                <h2 class="text-xl sm:text-2xl font-semibold text-[#D1AF60] mb-6">1. Personal Details</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                     <div>
-                        <label for="firstName" class="block text-gray-300 text-sm font-medium mb-1">First Name</label>
-                        <input type="text" id="firstName" name="firstName" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
+                        <label for="firstName" class="block text-gray-700 text-sm font-medium mb-1">First Name</label>
+                        <input type="text" id="firstName" name="firstName" class="w-full px-4 py-2 border border-gray-400 rounded-md bg-white text-gray-800 transition-all duration-200" required>
                     </div>
                     <div>
-                        <label for="secondName" class="block text-gray-300 text-sm font-medium mb-1">Second Name</label>
-                        <input type="text" id="secondName" name="secondName" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200">
+                        <label for="secondName" class="block text-gray-700 text-sm font-medium mb-1">Second Name</label>
+                        <input type="text" id="secondName" name="secondName" class="w-full px-4 py-2 border border-gray-400 rounded-md bg-white text-gray-800 transition-all duration-200">
                     </div>
                     <div>
-                        <label for="lastName" class="block text-gray-300 text-sm font-medium mb-1">Last Name</label>
-                        <input type="text" id="lastName" name="lastName" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200">
+                        <label for="lastName" class="block text-gray-700 text-sm font-medium mb-1">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" class="w-full px-4 py-2 border border-gray-400 rounded-md bg-white text-gray-800 transition-all duration-200">
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <label for="email" class="block text-gray-300 text-sm font-medium mb-1">Email ID</label>
-                        <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
+                        <label for="email" class="block text-gray-700 text-sm font-medium mb-1">Email ID</label>
+                        <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-400 rounded-md bg-white text-gray-800 transition-all duration-200" required>
                     </div>
                     <div>
-                        <label for="education" class="block text-gray-300 text-sm font-medium mb-1">Educational Qualification</label>
-                        <select id="education" name="education" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
+                        <label for="education" class="block text-gray-700 text-sm font-medium mb-1">Educational Qualification</label>
+                        <select id="education" name="education" class="w-full px-4 py-2 border border-gray-400 rounded-md bg-white text-gray-800 transition-all duration-200" required>
                             <option value="">Select Qualification</option>
                             <option value="Matriculation (10th)">Matriculation (10th)</option>
                             <option value="High School">High School</option>
@@ -72,12 +92,12 @@
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="phone" class="block text-gray-300 text-sm font-medium mb-1">Phone Number (What's app)</label>
-                        <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
+                        <label for="phone" class="block text-gray-700 text-sm font-medium mb-1">Phone Number (What's app)</label>
+                        <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 border border-gray-400 rounded-md bg-white text-gray-800 transition-all duration-200" required>
                     </div>
                     <div>
-                        <label for="country" class="block text-gray-300 text-sm font-medium mb-1">Country</label>
-                        <select id="country" name="country" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
+                        <label for="country" class="block text-gray-700 text-sm font-medium mb-1">Country</label>
+                        <select id="country" name="country" class="w-full px-4 py-2 border border-gray-400 rounded-md bg-white text-gray-800 transition-all duration-200" required>
                             <option value="India" selected>India</option>
                             <option value="United States">United States</option>
                             <option value="United Kingdom">United Kingdom</option>
@@ -100,17 +120,17 @@
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                     <div>
-                        <label for="address" class="block text-gray-300 text-sm font-medium mb-1">Address</label>
-                        <textarea id="address" name="address" rows="2" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required></textarea>
+                        <label for="address" class="block text-gray-700 text-sm font-medium mb-1">Address</label>
+                        <textarea id="address" name="address" rows="2" class="w-full px-4 py-2 border border-gray-400 rounded-md bg-white text-gray-800 transition-all duration-200" required></textarea>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                            <label for="pincode" class="block text-gray-300 text-sm font-medium mb-1">Pincode</label>
-                            <input type="text" id="pincode" name="pincode" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
+                            <label for="pincode" class="block text-gray-700 text-sm font-medium mb-1">Pincode</label>
+                            <input type="text" id="pincode" name="pincode" class="w-full px-4 py-2 border border-gray-400 rounded-md bg-white text-gray-800 transition-all duration-200" required>
                         </div>
                         <div>
-                            <label for="state" class="block text-gray-300 text-sm font-medium mb-1">State</label>
-                            <select id="state" name="state" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
+                            <label for="state" class="block text-gray-700 text-sm font-medium mb-1">State</label>
+                            <select id="state" name="state" class="w-full px-4 py-2 border border-gray-400 rounded-md bg-white text-gray-800 transition-all duration-200" required>
                                 <option value="">Select a state</option>
                                 <option value="Andhra Pradesh">Andhra Pradesh</option>
                                 <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -155,28 +175,28 @@
             </div>
 
             <!-- Section 2: Course Details -->
-            <div class="bg-gray-800 p-6 rounded-xl shadow-inner border border-gray-700">
-                <h2 class="text-xl sm:text-2xl font-semibold text-yellow-300 mb-6">2. Course Details</h2>
+            <div class="bg-gray-50 p-6 rounded-xl shadow-inner border border-gray-200">
+                <h2 class="text-xl sm:text-2xl font-semibold text-[#D1AF60] mb-6">2. Course Details</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                     <div>
-                        <label for="course" class="block text-gray-300 text-sm font-medium mb-1">Select Course</label>
-                        <select id="course" name="course" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
+                        <label for="course" class="block text-gray-700 text-sm font-medium mb-1">Select Course</label>
+                        <select id="course" name="course" class="w-full px-4 py-2 border border-gray-400 rounded-md bg-white text-gray-800 transition-all duration-200" required>
                             <option value="">Select a course</option>
                             <option value="Pytha Modeller Pack (Advanced)">Pytha Modeller Pack (Advanced)</option>
                             <option value="Pytha Planner Pack (Limited)">Pytha Planner Pack (Limited)</option>
                         </select>
                     </div>
                     <div>
-                        <label for="batch" class="block text-gray-300 text-sm font-medium mb-1">Preferred Batch</label>
-                        <select id="batch" name="batch" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
+                        <label for="batch" class="block text-gray-700 text-sm font-medium mb-1">Preferred Batch</label>
+                        <select id="batch" name="batch" class="w-full px-4 py-2 border border-gray-400 rounded-md bg-white text-gray-800 transition-all duration-200" required>
                             <option value="">Select a batch</option>
                             <option value="Morning (9:30am-12:30pm)">Morning (9:30am-12:30pm)</option>
                             <option value="Evening (2:00pm-5:00pm)">Evening (2:00pm-5:00pm)</option>
                         </select>
                     </div>
                     <div>
-                        <label for="laptop" class="block text-gray-300 text-sm font-medium mb-1">Do you have a laptop for Pytha?</label>
-                        <select id="laptop" name="laptop" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
+                        <label for="laptop" class="block text-gray-700 text-sm font-medium mb-1">Do you have a laptop for Pytha?</label>
+                        <select id="laptop" name="laptop" class="w-full px-4 py-2 border border-gray-400 rounded-md bg-white text-gray-800 transition-all duration-200" required>
                             <option value="">Select an option</option>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
@@ -186,9 +206,9 @@
                 <!-- New: Joining Batch details -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-gray-300 text-sm font-medium mb-1">Joining Batch</label>
+                        <label class="block text-gray-700 text-sm font-medium mb-1">Joining Batch</label>
                         <div class="grid grid-cols-2 gap-4">
-                            <select id="joiningMonth" name="joiningMonth" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
+                            <select id="joiningMonth" name="joiningMonth" class="w-full px-4 py-2 border border-gray-400 rounded-md bg-white text-gray-800 transition-all duration-200" required>
                                 <option value="">Select Month</option>
                                 <option value="January">January</option>
                                 <option value="February">February</option>
@@ -203,7 +223,7 @@
                                 <option value="November">November</option>
                                 <option value="December">December</option>
                             </select>
-                            <select id="joiningYear" name="joiningYear" class="w-full px-4 py-2 border border-gray-600 rounded-md bg-gray-700 text-gray-100 transition-all duration-200" required>
+                            <select id="joiningYear" name="joiningYear" class="w-full px-4 py-2 border border-gray-400 rounded-md bg-white text-gray-800 transition-all duration-200" required>
                                 <option value="">Select Year</option>
                                 <option value="2025">2025</option>
                                 <option value="2026">2026</option>
@@ -223,23 +243,23 @@
             </div>
 
             <!-- Section 3: Agreement and Actions -->
-            <div class="bg-gray-800 p-6 rounded-xl shadow-inner border border-gray-700">
-                <h2 class="text-xl sm:text-2xl font-semibold text-yellow-300 mb-6">3. Declaration</h2>
+            <div class="bg-gray-50 p-6 rounded-xl shadow-inner border border-gray-200">
+                <h2 class="text-xl sm:text-2xl font-semibold text-[#D1AF60] mb-6">3. Declaration</h2>
                 <div class="flex items-start mb-6">
-                    <input type="checkbox" id="agreement" name="agreement" class="mt-1 mr-2 accent-yellow-500" required>
-                    <label for="agreement" class="text-gray-300 text-sm">I agree that all the above information provided is correct.</label>
+                    <input type="checkbox" id="agreement" name="agreement" class="mt-1 mr-2 accent-[#D1AF60]" required>
+                    <label for="agreement" class="text-gray-700 text-sm">I agree that all the above information provided is correct.</label>
                 </div>
                 <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
-                    <button type="button" id="downloadPdfBtn" class="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105 active:scale-100 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <button type="button" id="downloadPdfBtn" class="bg-[#D1AF60] hover:bg-[#C4A15A] text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105 active:scale-100 disabled:opacity-50 disabled:cursor-not-allowed">
                         <span id="downloadText">Download Application</span>
-                        <svg id="downloadSpinner" class="hidden animate-spin h-5 w-5 text-gray-900 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <svg id="downloadSpinner" class="hidden animate-spin h-5 w-5 text-white mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
                     </button>
-                    <button type="button" id="sendApplicationBtn" class="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-gray-900 py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105 active:scale-100 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <button type="button" id="sendApplicationBtn" class="bg-[#D1AF60] hover:bg-[#C4A15A] text-white py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105 active:scale-100 disabled:opacity-50 disabled:cursor-not-allowed">
                         <span id="sendText">Send Application</span>
-                        <svg id="sendSpinner" class="hidden animate-spin h-5 w-5 text-gray-900 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <svg id="sendSpinner" class="hidden animate-spin h-5 w-5 text-white mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
@@ -251,18 +271,18 @@
 
     <!-- Custom Message Modal -->
     <div id="messageModal" class="fixed inset-0 hidden modal-backdrop flex items-center justify-center p-4">
-        <div class="bg-gray-800 rounded-lg p-6 shadow-2xl max-w-sm w-full border border-gray-700">
+        <div class="bg-white rounded-lg p-6 shadow-2xl max-w-sm w-full border border-gray-300">
             <div class="flex justify-between items-center mb-4">
-                <h3 id="modalTitle" class="text-xl font-bold text-yellow-400">Message</h3>
-                <button id="closeModalBtn" class="text-gray-400 hover:text-gray-100">
+                <h3 id="modalTitle" class="text-xl font-bold text-[#D1AF60]">Message</h3>
+                <button id="closeModalBtn" class="text-gray-500 hover:text-gray-800">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
-            <p id="modalMessage" class="text-gray-300 mb-4"></p>
+            <p id="modalMessage" class="text-gray-700 mb-4"></p>
             <div class="flex justify-end">
-                <button onclick="document.getElementById('messageModal').classList.add('hidden')" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-semibold py-2 px-4 rounded-md">
+                <button onclick="document.getElementById('messageModal').classList.add('hidden')" class="bg-[#D1AF60] hover:bg-[#C4A15A] text-white font-semibold py-2 px-4 rounded-md">
                     OK
                 </button>
             </div>
@@ -355,8 +375,8 @@
                     course: document.getElementById('course').value,
                     batch: document.getElementById('batch').value,
                     laptop: document.getElementById('laptop').value,
-                    joiningMonth: document.getElementById('joiningMonth').value, // New field
-                    joiningYear: document.getElementById('joiningYear').value // New field
+                    joiningMonth: document.getElementById('joiningMonth').value,
+                    joiningYear: document.getElementById('joiningYear').value
                 };
             }
 
@@ -384,11 +404,12 @@
                 const pageHeight = doc.internal.pageSize.getHeight();
                 let yPosition = 15;
 
-                const darkGray = [31, 41, 55];    // Tailwind's gray-800
-                const lightGray = [243, 244, 246]; // Tailwind's gray-100
-                const yellow = [253, 224, 71];   // Tailwind's yellow-400
-                const textColor = [55, 65, 81]; // Tailwind's gray-700
-                const lightTextColor = [107, 114, 128]; // Tailwind's gray-500
+                // Color definitions for the PDF
+                const black = [0, 0, 0];
+                const white = [255, 255, 255];
+                const goldenYellow = [209, 175, 96]; // #D1AF60
+                const bodyTextColor = [31, 41, 55]; // A dark gray for body text
+                const labelTextColor = [107, 114, 128]; // A lighter gray for labels
                 
                 // Helper function to check if a new page is needed.
                 function checkNewPage(neededSpace) {
@@ -399,7 +420,8 @@
                 }
 
                 // --- PDF Header ---
-                doc.setFillColor(darkGray[0], darkGray[1], darkGray[2]);
+                // Set header background to black
+                doc.setFillColor(black[0], black[1], black[2]);
                 doc.rect(0, 0, pageWidth, 35, "F");
                 
                 // Get and format the current date
@@ -407,19 +429,20 @@
                 const options = { year: 'numeric', month: 'long', day: 'numeric' };
                 const formattedDate = today.toLocaleDateString('en-US', options);
 
+                // Main title with golden yellow text
                 doc.setFontSize(20);
-                doc.setTextColor(yellow[0], yellow[1], yellow[2]);
+                doc.setTextColor(goldenYellow[0], goldenYellow[1], goldenYellow[2]);
                 doc.setFont("helvetica", "bold");
-                doc.text("Surabhi Institute of Pytha CAD", pageWidth / 2, 15, { align: "center" });
+                doc.text("SURABHI PYTHA ACADEMY", pageWidth / 2, 15, { align: "center" });
 
+                // Subtitle and date with golden yellow text
                 doc.setFontSize(12);
-                doc.setTextColor(lightGray[0], lightGray[1], lightGray[2]);
+                doc.setTextColor(goldenYellow[0], goldenYellow[1], goldenYellow[2]);
                 doc.setFont("helvetica", "normal");
                 doc.text("Course Application Form", pageWidth / 2, 25, { align: "center" });
                 
-                // Add the formatted date to the header, now slightly lower
                 doc.setFontSize(10);
-                doc.setTextColor(lightGray[0], lightGray[1], lightGray[2]);
+                doc.setTextColor(goldenYellow[0], goldenYellow[1], goldenYellow[2]);
                 doc.text(formattedDate, pageWidth - margin, 31, { align: "right" });
 
                 yPosition = 45;
@@ -428,17 +451,17 @@
                 function addSectionTitle(title) {
                     checkNewPage(15);
                     doc.setFontSize(16);
-                    doc.setTextColor(textColor[0], textColor[1], textColor[2]);
+                    doc.setTextColor(bodyTextColor[0], bodyTextColor[1], bodyTextColor[2]);
                     doc.setFont("helvetica", "bold");
                     doc.text(title, margin, yPosition);
                     yPosition += 5;
-                    doc.setDrawColor(yellow[0], yellow[1], yellow[2]);
+                    doc.setDrawColor(goldenYellow[0], goldenYellow[1], goldenYellow[2]);
                     doc.setLineWidth(0.8);
                     doc.line(margin, yPosition, margin + 40, yPosition);
                     yPosition += 10;
                 }
 
-                // NEW: Helper function to add details in a more attractive, card-like style.
+                // Helper function to add details in a more attractive, card-like style.
                 function addCardDetails(details, columns = 2) {
                     const cardWidth = (pageWidth - (margin * 2) - ((columns - 1) * 5)) / columns;
                     const cardHeight = 15;
@@ -453,12 +476,12 @@
                         doc.roundedRect(xPosition, yPosition, cardWidth, cardHeight, 2, 2, 'F');
                         
                         doc.setFontSize(9);
-                        doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
+                        doc.setTextColor(labelTextColor[0], labelTextColor[1], labelTextColor[2]);
                         doc.setFont("helvetica", "normal");
                         doc.text(detail.label, xPosition + 5, yPosition + 5);
                         
                         doc.setFontSize(11);
-                        doc.setTextColor(textColor[0], textColor[1], textColor[2]);
+                        doc.setTextColor(bodyTextColor[0], bodyTextColor[1], bodyTextColor[2]);
                         doc.setFont("helvetica", "bold");
                         const valueText = doc.splitTextToSize(String(detail.value), cardWidth - 10);
                         doc.text(valueText, xPosition + 5, yPosition + 11);
@@ -499,7 +522,7 @@
                     { label: "Course", value: data.course },
                     { label: "Preferred Batch", value: data.batch },
                     { label: "Has Laptop", value: data.laptop },
-                    { label: "Joining Batch", value: `${data.joiningMonth}, ${data.joiningYear}` } // New field for PDF
+                    { label: "Joining Batch", value: `${data.joiningMonth}, ${data.joiningYear}` }
                 ];
                 addCardDetails(courseDetails, 2);
                 
@@ -509,17 +532,19 @@
                 const noteHeight = noteTextLines.length * 5;
                 const noteYPosition = pageHeight - 25 - noteHeight;
                 doc.setFontSize(10);
-                doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
+                doc.setTextColor(labelTextColor[0], labelTextColor[1], labelTextColor[2]);
                 doc.setFont("helvetica", "normal");
                 doc.text(noteTextLines, margin, noteYPosition);
                 
                 // --- Footer ---
-                doc.setFillColor(darkGray[0], darkGray[1], darkGray[2]);
+                // Set footer background to black
+                doc.setFillColor(black[0], black[1], black[2]);
                 doc.rect(0, pageHeight - 15, pageWidth, 15, "F");
                 
+                // Footer text with white color
                 doc.setFontSize(9);
-                doc.setTextColor(lightGray[0], lightGray[1], lightGray[2]);
-                doc.text("Surabhi Institute of Pytha CAD | Ph: 7034464621 | Email: ashly.pyo@gmail.com", pageWidth / 2, pageHeight - 5, { align: "center" });
+                doc.setTextColor(white[0], white[1], white[2]);
+                doc.text("SURABHI PYTHA ACADEMY | Ph: 7034464621 | Email: ashly.pyo@gmail.com", pageWidth / 2, pageHeight - 5, { align: "center" });
 
                 doc.save(`Application_${data.firstName}_${data.lastName}.pdf`);
                 
