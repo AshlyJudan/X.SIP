@@ -531,53 +531,52 @@
                 const noteTextLines = doc.splitTextToSize(noteText, pageWidth - (margin * 2));
                 const noteHeight = noteTextLines.length * 5;
                 const noteYPosition = pageHeight - 25 - noteHeight;
+                
                 doc.setFontSize(10);
                 doc.setTextColor(labelTextColor[0], labelTextColor[1], labelTextColor[2]);
-                doc.setFont("helvetica", "normal");
+                doc.setFont("helvetica", "italic");
                 doc.text(noteTextLines, margin, noteYPosition);
-                
-                // --- Footer ---
-                // Set footer background to black
-                doc.setFillColor(black[0], black[1], black[2]);
-                doc.rect(0, pageHeight - 15, pageWidth, 15, "F");
-                
-                // Footer text with white color
-                doc.setFontSize(9);
-                doc.setTextColor(white[0], white[1], white[2]);
-                doc.text("SURABHI PYTHA ACADEMY | Ph: 7034464621 | Email: ashly.pyo@gmail.com", pageWidth / 2, pageHeight - 5, { align: "center" });
 
-                doc.save(`Application_${data.firstName}_${data.lastName}.pdf`);
-                
+                doc.save(`Course_Application_${data.lastName}_${data.firstName}.pdf`);
                 return true;
             }
 
-            // Event listener for the "Download Application" button.
-            downloadBtn.addEventListener('click', async () => {
-                const data = getFormData();
+            // Event listener for the download button.
+            downloadBtn.addEventListener('click', () => {
                 toggleLoading(downloadBtn, downloadText, downloadSpinner, true);
-                // The PDF generation is synchronous, but we'll use a Promise to simulate a delay and show the spinner
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                createAndDownloadPdf(data);
-                toggleLoading(downloadBtn, downloadText, downloadSpinner, false);
+                
+                // Use a short delay to allow the spinner to be visible
+                setTimeout(() => {
+                    const success = createAndDownloadPdf(getFormData());
+                    toggleLoading(downloadBtn, downloadText, downloadSpinner, false);
+                    if (success) {
+                        showMessage('Your application PDF has been downloaded successfully!');
+                    }
+                }, 1000);
             });
 
-            // Event listener for the "Send Application" button (WhatsApp).
-            sendBtn.addEventListener('click', async () => {
+            // Event listener for the send button.
+            sendBtn.addEventListener('click', () => {
                 const data = getFormData();
-                toggleLoading(sendBtn, sendText, sendSpinner, true);
-                // Simulate delay for PDF download before opening WhatsApp
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                if (createAndDownloadPdf(data)) {
-                    // Prepare the WhatsApp message.
-                    const phoneNumber = '7034464621';
-                    const whatsappMessage = `Hello Surabhi Institute,\n\nI have just submitted my application form. Please find the attached PDF.\n\nThank you,\n${data.firstName} ${data.lastName}`;
-                    const encodedMessage = encodeURIComponent(whatsappMessage);
-                    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-
-                    window.open(whatsappUrl, '_blank');
+                if (!form.checkValidity() || !agreementCheckbox.checked) {
+                    form.reportValidity();
+                    if (!agreementCheckbox.checked) {
+                        showMessage('Please agree that the information is correct.');
+                    }
+                    return;
                 }
-                toggleLoading(sendBtn, sendText, sendSpinner, false);
+
+                toggleLoading(sendBtn, sendText, sendSpinner, true);
+                
+                // Simulate sending the data to a server
+                setTimeout(() => {
+                    toggleLoading(sendBtn, sendText, sendSpinner, false);
+                    // You could add logic here to actually send the data via an API call
+                    // For this example, we just show a success message.
+                    showMessage('Your application has been successfully sent!');
+                }, 2000); // Simulate a 2-second network delay
             });
+
         })();
     </script>
 </body>
