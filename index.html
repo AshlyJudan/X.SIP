@@ -66,6 +66,41 @@
             background-color: transparent;
             display: block;
         }
+
+        /* Custom Modal for validation messages, since alert() is not allowed */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more responsive */
+            max-width: 400px;
+            text-align: center;
+            border-radius: 8px;
+        }
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -201,6 +236,9 @@
                         <label for="message" class="block text-left text-gray-700 text-sm font-medium mb-2">Message</label>
                         <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-md bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#D1AF60]" placeholder="Your message..." required></textarea>
                     </div>
+                    <!-- Message container for validation feedback -->
+                    <div id="message-container" class="text-sm font-medium text-red-600"></div>
+
                     <button type="button" id="sendWhatsappBtn" class="w-full bg-[#D1AF60] hover:bg-[#B5944B] text-white font-bold py-3 px-6 rounded-md shadow-lg transition duration-300 transform hover:scale-105">
                         Send Message via WhatsApp
                     </button>
@@ -213,6 +251,14 @@
             </div>
         </div>
     </section>
+    
+    <!-- Custom Modal UI for alerts, replacing alert() -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <p id="modal-message"></p>
+        </div>
+    </div>
 
     <!-- Footer Section -->
     <footer class="bg-black text-white py-8 px-4 sm:px-6 lg:px-8 mt-12 rounded-t-lg">
@@ -459,24 +505,70 @@
             // Initial setup
             resizeCanvas();
             animateShapes();
-
-            // --- Contact Form WhatsApp Integration ---
-            const sendWhatsappBtn = document.getElementById('sendWhatsappBtn');
-            sendWhatsappBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const message = document.getElementById('message').value;
-                const phoneNumber = '918075098945'; // Updated phone number with India's country code
-
-                const whatsappMessage = `Hello Surabhi Pytha Academy,\n\nI have a message from your website:\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
-                const encodedMessage = encodeURIComponent(whatsappMessage);
-                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-                window.open(whatsappUrl, '_blank');
-                document.getElementById('contactForm').reset();
-            });
         };
+
+        // --- Custom Modal Functions ---
+        const modal = document.getElementById('myModal');
+        const modalMessage = document.getElementById('modal-message');
+        const closeBtn = document.getElementsByClassName('close-button')[0];
+
+        // Function to show the modal with a specific message
+        function showModal(message) {
+            modalMessage.textContent = message;
+            modal.style.display = 'flex';
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // When the user clicks on (x), close the modal
+        closeBtn.onclick = function() {
+            closeModal();
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // --- Contact Form WhatsApp Integration (Updated) ---
+        const sendWhatsappBtn = document.getElementById('sendWhatsappBtn');
+        const contactForm = document.getElementById('contactForm');
+
+        sendWhatsappBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            const messageContainer = document.getElementById('message-container');
+
+            // Simple validation to ensure fields are not empty
+            if (name === '' || email === '' || message === '') {
+                messageContainer.textContent = 'Please fill out all fields before sending.';
+                return; // Stop the function
+            } else {
+                messageContainer.textContent = ''; // Clear any previous error messages
+            }
+
+            // Set the phone number for WhatsApp
+            const phoneNumber = '918075098945'; // Phone number with country code
+            const formattedMessage = `Hello Surabhi Pytha Academy,\n\nI have a message from your website:\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+
+            const encodedMessage = encodeURIComponent(formattedMessage);
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            // Open the WhatsApp link in a new tab
+            window.open(whatsappUrl, '_blank');
+
+            // Reset the form after successfully opening the link
+            contactForm.reset();
+        });
     </script>
 </body>
 </html>
