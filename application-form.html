@@ -406,7 +406,6 @@
 
                 // Color definitions for the PDF
                 const black = [0, 0, 0];
-                const white = [255, 255, 255];
                 const goldenYellow = [209, 175, 96]; // #D1AF60
                 const bodyTextColor = [31, 41, 55]; // A dark gray for body text
                 const labelTextColor = [107, 114, 128]; // A lighter gray for labels
@@ -529,35 +528,54 @@
                 // --- Note Section ---
                 const noteText = "Please check if the above details are correct and send the downloaded form to our WhatsApp number. This document is for application purposes only.";
                 const noteTextLines = doc.splitTextToSize(noteText, pageWidth - (margin * 2));
-                const noteHeight = noteTextLines.length * 5;
-                const noteYPosition = pageHeight - 25 - noteHeight;
-                
+                checkNewPage(doc.getTextDimensions(noteTextLines).h + 10);
                 doc.setFontSize(10);
                 doc.setTextColor(labelTextColor[0], labelTextColor[1], labelTextColor[2]);
-                doc.setFont("helvetica", "italic");
-                doc.text(noteTextLines, margin, noteYPosition);
+                doc.text(noteTextLines, margin, yPosition);
+                yPosition += doc.getTextDimensions(noteTextLines).h + 10;
 
-                doc.save(`Course_Application_${data.lastName}_${data.firstName}.pdf`);
+
+                // --- Save the PDF with the dynamic filename ---
+                const applicantName = `${data.firstName || ''} ${data.lastName || ''}`.trim();
+                const filename = applicantName ? 
+                    `${applicantName.replace(/\s+/g, '_')}_Application.pdf` : 
+                    "Application_Form.pdf";
+
+                doc.save(filename);
                 return true;
             }
 
-            // Event listener for the download button.
-            downloadBtn.addEventListener('click', () => {
+            // Function to handle the form submission for the "Send" button.
+            // This is just a placeholder as a real backend is needed.
+            async function sendApplication(data) {
+                // Here, you would implement the logic to send the data to a server
+                // via an API call (e.g., using fetch).
+                console.log("Sending application data:", data);
+
+                // Simulate a network request
+                return new Promise(resolve => setTimeout(resolve, 1500));
+            }
+
+            // Event listener for the Download PDF button.
+            downloadBtn.addEventListener('click', async () => {
+                // Ensure a smooth user experience by handling loading state.
                 toggleLoading(downloadBtn, downloadText, downloadSpinner, true);
-                
-                // Use a short delay to allow the spinner to be visible
-                setTimeout(() => {
-                    const success = createAndDownloadPdf(getFormData());
-                    toggleLoading(downloadBtn, downloadText, downloadSpinner, false);
+                try {
+                    const data = getFormData();
+                    const success = await createAndDownloadPdf(data);
                     if (success) {
-                        showMessage('Your application PDF has been downloaded successfully!');
+                        showMessage('Your application has been successfully downloaded.');
                     }
-                }, 1000);
+                } catch (error) {
+                    console.error('Error generating PDF:', error);
+                    showMessage('An error occurred while generating the PDF. Please try again.');
+                } finally {
+                    toggleLoading(downloadBtn, downloadText, downloadSpinner, false);
+                }
             });
 
-            // Event listener for the send button.
-            sendBtn.addEventListener('click', () => {
-                const data = getFormData();
+            // Event listener for the Send Application button.
+            sendBtn.addEventListener('click', async () => {
                 if (!form.checkValidity() || !agreementCheckbox.checked) {
                     form.reportValidity();
                     if (!agreementCheckbox.checked) {
@@ -565,18 +583,20 @@
                     }
                     return;
                 }
-
-                toggleLoading(sendBtn, sendText, sendSpinner, true);
                 
-                // Simulate sending the data to a server
-                setTimeout(() => {
-                    toggleLoading(sendBtn, sendText, sendSpinner, false);
-                    // You could add logic here to actually send the data via an API call
-                    // For this example, we just show a success message.
+                toggleLoading(sendBtn, sendText, sendSpinner, true);
+                try {
+                    const data = getFormData();
+                    await sendApplication(data);
                     showMessage('Your application has been successfully sent!');
-                }, 2000); // Simulate a 2-second network delay
+                    form.reset(); // Clear the form after successful submission.
+                } catch (error) {
+                    console.error('Error sending application:', error);
+                    showMessage('An error occurred while sending the application. Please try again.');
+                } finally {
+                    toggleLoading(sendBtn, sendText, sendSpinner, false);
+                }
             });
-
         })();
     </script>
 </body>
