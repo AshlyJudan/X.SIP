@@ -282,7 +282,7 @@
             </div>
             <p id="modalMessage" class="text-gray-700 mb-4"></p>
             <div class="flex justify-end">
-                <button onclick="document.getElementById('messageModal').classList.add('hidden')" class="bg-[#D1AF60] hover:bg-[#C4A15A] text-white font-semibold py-2 px-4 rounded-md">
+                <button id="modalOkBtn" class="bg-[#D1AF60] hover:bg-[#C4A15A] text-white font-semibold py-2 px-4 rounded-md">
                     OK
                 </button>
             </div>
@@ -319,28 +319,46 @@
             const messageModal = document.getElementById('messageModal');
             const modalMessage = document.getElementById('modalMessage');
             const closeModalBtn = document.getElementById('closeModalBtn');
+            const modalOkBtn = document.getElementById('modalOkBtn'); // Reference to the OK button
 
             // Get references to loading elements
             const downloadText = document.getElementById('downloadText');
             const downloadSpinner = document.getElementById('downloadSpinner');
             const sendText = document.getElementById('sendText');
             const sendSpinner = document.getElementById('sendSpinner');
+            
+            // This variable will store the action to perform when the modal's OK button is clicked.
+            let modalAction = 'close'; 
 
             /**
-             * Shows a custom message modal with the given message.
+             * Shows a custom message modal with the given message and sets an action.
              * This replaces the use of `alert()` for a better user experience.
              * @param {string} message The message to display in the modal.
+             * @param {string} action The action to perform on 'OK'. Can be 'close' or 'redirect'.
              */
-            function showMessage(message) {
+            function showMessage(message, action) {
                 modalMessage.textContent = message;
+                modalAction = action;
                 messageModal.classList.remove('hidden');
             }
+
+            // General event listener for the modal's OK button.
+            modalOkBtn.addEventListener('click', () => {
+                if (modalAction === 'redirect') {
+                    // Redirect to the specified main page URL.
+                    // This is a placeholder URL for the main website.
+                    window.location.href = 'https://www.surabhipythaacademy.com/'; 
+                } else {
+                    // Default action: just close the modal.
+                    messageModal.classList.add('hidden');
+                }
+            });
 
             // Event listener for the modal close button.
             closeModalBtn.addEventListener('click', () => {
                 messageModal.classList.add('hidden');
             });
-            
+
             /**
              * Function to toggle the loading state on a button.
              * @param {HTMLElement} button The button element.
@@ -393,7 +411,7 @@
                 }
                 
                 if (!agreementCheckbox.checked) {
-                    showMessage('Please agree that the information is correct.');
+                    showMessage('Please agree that the information is correct.', 'close');
                     return false;
                 }
 
@@ -409,10 +427,11 @@
                 const goldenYellow = [209, 175, 96]; // #D1AF60
                 const bodyTextColor = [31, 41, 55]; // A dark gray for body text
                 const labelTextColor = [107, 114, 128]; // A lighter gray for labels
+                const greyText = [169, 169, 169]; // A light gray for footer text
                 
                 // Helper function to check if a new page is needed.
                 function checkNewPage(neededSpace) {
-                    if (yPosition + neededSpace > pageHeight - margin) {
+                    if (yPosition + neededSpace > pageHeight - margin - 15) { // Adjusted to account for footer
                         doc.addPage();
                         yPosition = margin;
                     }
@@ -516,6 +535,7 @@
                 addCardDetails(personalDetails);
 
                 // --- Section 2: Course Details ---
+                yPosition += 20; // Add 20mm of vertical space
                 addSectionTitle("2. Course Details");
                 const courseDetails = [
                     { label: "Course", value: data.course },
@@ -524,16 +544,37 @@
                     { label: "Joining Batch", value: `${data.joiningMonth}, ${data.joiningYear}` }
                 ];
                 addCardDetails(courseDetails, 2);
-                
-                // --- Note Section ---
-                const noteText = "Please check if the above details are correct and send the downloaded form to our WhatsApp number. This document is for application purposes only.";
-                const noteTextLines = doc.splitTextToSize(noteText, pageWidth - (margin * 2));
-                checkNewPage(doc.getTextDimensions(noteTextLines).h + 10);
-                doc.setFontSize(10);
-                doc.setTextColor(labelTextColor[0], labelTextColor[1], labelTextColor[2]);
-                doc.text(noteTextLines, margin, yPosition);
-                yPosition += doc.getTextDimensions(noteTextLines).h + 10;
 
+                // --- PDF Footer ---
+                // Set footer background to black
+                const footerHeight = 15;
+                const footerY = pageHeight - footerHeight;
+                doc.setFillColor(black[0], black[1], black[2]);
+                doc.rect(0, footerY, pageWidth, footerHeight, "F");
+                
+                // Set footer text color and add content
+                doc.setFontSize(8);
+                doc.setTextColor(greyText[0], greyText[1], greyText[2]);
+                doc.setFont("helvetica", "normal");
+                const footerText = "surabhipythaacademy@gmail.com | 8075098945 | www.surabhipythaacademy.com";
+                doc.text(footerText, pageWidth / 2, footerY + (footerHeight / 2) + 1, { align: "center" });
+
+                // --- Note Section (Placed 5mm above the footer) ---
+                const noteText = "Please check if the above details are correct and send the downloaded form to our WhatsApp number.";
+                const noteTextLines = doc.splitTextToSize(noteText, pageWidth - (margin * 2));
+                const noteHeight = doc.getTextDimensions(noteTextLines).h;
+                const noteY = footerY - 5 - noteHeight;
+                
+                // Check if the note would overlap with the main content and add a new page if necessary
+                if (noteY < yPosition) {
+                    doc.addPage();
+                    yPosition = margin;
+                    doc.text(noteTextLines, margin, yPosition); // Place note at top of new page
+                } else {
+                    doc.setFontSize(10);
+                    doc.setTextColor(labelTextColor[0], labelTextColor[1], labelTextColor[2]);
+                    doc.text(noteTextLines, margin, noteY);
+                }
 
                 // --- Save the PDF with the dynamic filename ---
                 const applicantName = `${data.firstName || ''} ${data.lastName || ''}`.trim();
@@ -564,11 +605,12 @@
                     const data = getFormData();
                     const success = await createAndDownloadPdf(data);
                     if (success) {
-                        showMessage('Your application has been successfully downloaded.');
+                        // After successful download, show a message and set the modal action to redirect
+                        showMessage('Your application has been successfully downloaded.', 'redirect');
                     }
                 } catch (error) {
                     console.error('Error generating PDF:', error);
-                    showMessage('An error occurred while generating the PDF. Please try again.');
+                    showMessage('An error occurred while generating the PDF. Please try again.', 'close');
                 } finally {
                     toggleLoading(downloadBtn, downloadText, downloadSpinner, false);
                 }
@@ -579,7 +621,7 @@
                 if (!form.checkValidity() || !agreementCheckbox.checked) {
                     form.reportValidity();
                     if (!agreementCheckbox.checked) {
-                        showMessage('Please agree that the information is correct.');
+                        showMessage('Please agree that the information is correct.', 'close');
                     }
                     return;
                 }
@@ -588,11 +630,12 @@
                 try {
                     const data = getFormData();
                     await sendApplication(data);
-                    showMessage('Your application has been successfully sent!');
+                    // After successful submission, show a message and set the modal action to close
+                    showMessage('Your application has been successfully sent!', 'close');
                     form.reset(); // Clear the form after successful submission.
                 } catch (error) {
                     console.error('Error sending application:', error);
-                    showMessage('An error occurred while sending the application. Please try again.');
+                    showMessage('An error occurred while sending the application. Please try again.', 'close');
                 } finally {
                     toggleLoading(sendBtn, sendText, sendSpinner, false);
                 }
