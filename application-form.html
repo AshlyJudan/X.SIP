@@ -332,41 +332,54 @@
             const downloadSpinner = document.getElementById('downloadSpinner');
             const sendText = document.getElementById('sendText');
             const sendSpinner = document.getElementById('sendSpinner');
-            
+
+            // A simple state machine to manage modal flow
+            let modalState = 'initial';
+
             /**
-             * Shows a custom message modal with the given message and control over button visibility.
-             * This replaces the use of `alert()` for a better user experience.
+             * Shows a custom message modal with the given message and manages the button state.
              * @param {string} message The message to display in the modal.
-             * @param {boolean} showBackButton Whether to show the "Back to main page" button.
+             * @param {string} state The state of the modal ('download-prompt-1', 'download-prompt-2', 'send-prompt').
              */
-            function showMessage(message, showBackButton = false) {
+            function showMessage(message, state) {
                 modalMessage.textContent = message;
+                modalState = state;
                 messageModal.classList.remove('hidden');
+
+                // Hide all buttons initially
+                modalOkBtn.classList.add('hidden');
+                backToMainPageBtn.classList.add('hidden');
                 
-                if (showBackButton) {
-                    modalOkBtn.classList.add('hidden');
-                    backToMainPageBtn.classList.remove('hidden');
-                } else {
+                if (state === 'download-prompt-1' || state === 'send-prompt') {
                     modalOkBtn.classList.remove('hidden');
-                    backToMainPageBtn.classList.add('hidden');
+                } else if (state === 'download-prompt-2') {
+                    backToMainPageBtn.classList.remove('hidden');
                 }
             }
 
             // Event listener to close the modal
-            modalOkBtn.addEventListener('click', () => {
-                messageModal.classList.add('hidden');
-            });
-            
-            // Event listener for the new "Back to main page" button
-            backToMainPageBtn.addEventListener('click', () => {
-                window.location.href = 'index.html';
-            });
-            
-            // Event listener for the modal close button.
             closeModalBtn.addEventListener('click', () => {
                 messageModal.classList.add('hidden');
             });
 
+            // Event listener for the "OK" button in the modal.
+            // This is where the new, multi-step message logic is handled.
+            modalOkBtn.addEventListener('click', () => {
+                if (modalState === 'download-prompt-1') {
+                    // This is the first pop-up after a successful download.
+                    // Show the second pop-up with instructions and a "Back to Main page" button.
+                    showMessage('Send the downloaded application to our what\'s app number', 'download-prompt-2');
+                } else {
+                    // For all other cases (e.g., submission success, validation errors), just close the modal.
+                    messageModal.classList.add('hidden');
+                }
+            });
+            
+            // Event listener for the "Back to Main page" button
+            backToMainPageBtn.addEventListener('click', () => {
+                window.location.href = 'index.html';
+            });
+            
             /**
              * Function to toggle the loading state on a button.
              * @param {HTMLElement} button The button element.
@@ -419,7 +432,7 @@
                 }
                 
                 if (!agreementCheckbox.checked) {
-                    showMessage('Please agree that the information is correct.');
+                    showMessage('Please agree that the information is correct.', 'error');
                     return false;
                 }
 
@@ -592,11 +605,12 @@
                     await new Promise(resolve => setTimeout(resolve, 500)); // Simulate a delay for a better UX
                     const formData = getFormData();
                     if (createAndDownloadPdf(formData)) {
-                        showMessage('Your application has been successfully downloaded.', false);
+                        // After a successful download, show the first message and set the modal state.
+                        showMessage('Your application has been successfully downloaded.', 'download-prompt-1');
                     }
                 } catch (error) {
                     console.error('Error creating PDF:', error);
-                    showMessage('An error occurred while generating the PDF. Please check your inputs.', false);
+                    showMessage('An error occurred while generating the PDF. Please check your inputs.', 'error');
                 } finally {
                     toggleLoading(downloadBtn, downloadText, downloadSpinner, false);
                 }
@@ -612,11 +626,11 @@
                     // Check form validity and agreement
                     if (!form.checkValidity()) {
                         form.reportValidity();
-                        showMessage('Please fill out all required fields.', false);
+                        showMessage('Please fill out all required fields.', 'error');
                         return;
                     }
                     if (!agreementCheckbox.checked) {
-                        showMessage('Please agree that the information is correct.', false);
+                        showMessage('Please agree that the information is correct.', 'error');
                         return;
                     }
 
@@ -629,11 +643,11 @@
                     // In a real-world scenario, you would send this data to a server here.
                     // Example: await fetch('your-api-endpoint', { method: 'POST', body: JSON.stringify(formData) });
                     
-                    showMessage('Your application has been sent successfully! We will contact you soon.', true);
+                    showMessage('Your application has been sent successfully! We will contact you soon.', 'send-prompt');
 
                 } catch (error) {
                     console.error('Submission failed:', error);
-                    showMessage('Submission failed. Please try again later.', false);
+                    showMessage('Submission failed. Please try again later.', 'error');
                 } finally {
                     toggleLoading(sendBtn, sendText, sendSpinner, false);
                 }
