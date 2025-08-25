@@ -242,9 +242,9 @@
                 </div>
             </div>
 
-            <!-- Section 3: Agreement and Actions -->
+            <!-- Section 3: Submit & Download -->
             <div class="bg-gray-50 p-6 rounded-xl shadow-inner border border-gray-200">
-                <h2 class="text-xl sm:text-2xl font-semibold text-[#D1AF60] mb-6">3. Declaration</h2>
+                <h2 class="text-xl sm:text-2xl font-semibold text-[#D1AF60] mb-6">3. Submit & Download</h2>
                 <div class="flex items-start mb-6">
                     <input type="checkbox" id="agreement" name="agreement" class="mt-1 mr-2 accent-[#D1AF60]" required>
                     <label for="agreement" class="text-gray-700 text-sm">I agree that all the above information provided is correct.</label>
@@ -433,6 +433,7 @@
                 // Color definitions for the PDF
                 const black = [0, 0, 0];
                 const goldenYellow = [209, 175, 96]; // #D1AF60
+                const white = [255, 255, 255];
                 const bodyTextColor = [31, 41, 55]; // A dark gray for body text
                 const labelTextColor = [107, 114, 128]; // A lighter gray for labels
                 const greyText = [169, 169, 169]; // A light gray for footer text
@@ -442,6 +443,11 @@
                     if (yPosition + neededSpace > pageHeight - margin - 15) { // Adjusted to account for footer
                         doc.addPage();
                         yPosition = margin;
+                        doc.setTextColor(greyText[0], greyText[1], greyText[2]);
+                        doc.setFontSize(8);
+                        doc.text("SURABHI PYTHA ACADEMY | Application Form", pageWidth / 2, pageHeight - 10, { align: "center" });
+                        doc.text(`Page ${doc.internal.pages.length - 1}`, pageWidth - margin, pageHeight - 10, { align: "right" });
+                        doc.setTextColor(bodyTextColor[0], bodyTextColor[1], bodyTextColor[2]);
                     }
                 }
 
@@ -533,8 +539,8 @@
                 const personalDetails = [
                     { label: "Full Name", value: `${data.firstName} ${data.secondName} ${data.lastName}` },
                     { label: "Email ID", value: data.email },
-                    { label: "Phone Number", value: data.phone },
                     { label: "Educational Qualification", value: data.education },
+                    { label: "Phone Number", value: data.phone },
                     { label: "Country", value: data.country },
                     { label: "State", value: data.state },
                     { label: "Pincode", value: data.pincode },
@@ -543,103 +549,95 @@
                 addCardDetails(personalDetails);
 
                 // --- Section 2: Course Details ---
+                yPosition += 25;
                 addSectionTitle("2. Course Details");
                 const courseDetails = [
                     { label: "Selected Course", value: data.course },
                     { label: "Preferred Batch", value: data.batch },
-                    { label: "Has Laptop for Pytha", value: data.laptop },
-                    { label: "Joining Batch", value: `${data.joiningMonth}, ${data.joiningYear}` }
+                    { label: "Laptop for Pytha", value: data.laptop },
+                    { label: "Joining Batch", value: `${data.joiningMonth} ${data.joiningYear}` }
                 ];
                 addCardDetails(courseDetails, 2);
 
-                // --- Section 3: Declaration ---
-                addSectionTitle("3. Declaration");
-                doc.setFontSize(10);
-                doc.setTextColor(bodyTextColor[0], bodyTextColor[1], bodyTextColor[2]);
-                doc.text("I hereby declare that all the information provided above is true and correct to the best of my knowledge.", margin, yPosition);
-                yPosition += 15;
+                // --- PDF Footer ---
+                // Add the new black footer with contact information
+                doc.setFillColor(black[0], black[1], black[2]);
+                doc.rect(0, pageHeight - 15, pageWidth, 15, "F");
+                doc.setTextColor(white[0], white[1], white[2]);
+                doc.setFontSize(8);
+                doc.setFont("helvetica", "normal");
+                const footerText = "surabhipythaacademy@gmail.com | 8075098945 | www.surabhipythaacademy.com";
+                doc.text(footerText, pageWidth / 2, pageHeight - 8, { align: "center" });
 
-                doc.setFontSize(10);
-                doc.text(`Date: ${formattedDate}`, margin, yPosition);
-                yPosition += 10;
-                doc.text(`Signature: ____________________`, margin, yPosition);
-
-                // Add footer
-                const pageCount = doc.internal.getNumberOfPages();
-                for (let i = 1; i <= pageCount; i++) {
+                // Add old footer info for page numbers
+                const totalPages = doc.internal.getNumberOfPages();
+                for (let i = 1; i <= totalPages; i++) {
                     doc.setPage(i);
                     doc.setFontSize(8);
                     doc.setTextColor(greyText[0], greyText[1], greyText[2]);
-                    doc.text(`Page ${i} of ${pageCount}`, pageWidth - margin, pageHeight - 10, { align: "right" });
-                    doc.text(`Generated on ${formattedDate}`, margin, pageHeight - 10);
+                    doc.text(`Page ${i} of ${totalPages}`, pageWidth - margin, pageHeight - 10, { align: "right" });
                 }
 
                 // Save the PDF
-                doc.save('Application Form.pdf');
+                doc.save(`Course-Application-${data.lastName || 'applicant'}.pdf`);
                 return true;
             }
 
-            // Event listener for the download button.
+            /**
+             * Handles the PDF download process, including form validation and loading state.
+             */
             downloadBtn.addEventListener('click', async () => {
-                const formData = getFormData();
-                if (createAndDownloadPdf(formData)) {
-                    // Show success message with the back button option.
-                    showMessage('Your application form has been downloaded successfully. You can now save and print it.', true);
-                }
-            });
-
-            // Event listener for the send application button.
-            sendBtn.addEventListener('click', async () => {
-                if (form.checkValidity() && agreementCheckbox.checked) {
-                    toggleLoading(sendBtn, sendText, sendSpinner, true);
+                toggleLoading(downloadBtn, downloadText, downloadSpinner, true);
+                try {
+                    await new Promise(resolve => setTimeout(resolve, 500)); // Simulate a delay for a better UX
                     const formData = getFormData();
-                    
-                    // The API key is provided by the canvas environment.
-                    const apiKey = ""; 
-                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-                    
-                    // Create the prompt with the form data.
-                    const prompt = `Please summarize the following course application form data in a concise, human-readable format, suitable for a professional email. Do not include any PII (Personally Identifiable Information) like name, email, or phone number.
-                    Form Data:
-                    - Educational Qualification: ${formData.education}
-                    - Country: ${formData.country}
-                    - State: ${formData.state}
-                    - Course: ${formData.course}
-                    - Batch: ${formData.batch}
-                    - Laptop: ${formData.laptop}
-                    - Joining Batch: ${formData.joiningMonth}, ${formData.joiningYear}`;
-
-                    const payload = {
-                        contents: [{ parts: [{ text: prompt }] }],
-                    };
-
-                    try {
-                        const response = await fetch(apiUrl, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload)
-                        });
-
-                        const result = await response.json();
-                        const summary = result.candidates[0].content.parts[0].text;
-                        
-                        // Use a custom message box instead of alert.
-                        showMessage(`Application Sent Successfully! A summary has been generated for a representative:
-                        \n${summary}`);
-                    } catch (error) {
-                        console.error('Error sending application or generating summary:', error);
-                        showMessage('An error occurred while sending your application. Please try again later.');
-                    } finally {
-                        toggleLoading(sendBtn, sendText, sendSpinner, false);
+                    if (createAndDownloadPdf(formData)) {
+                        showMessage('Your application has been successfully downloaded.', false);
                     }
-                } else {
-                    form.reportValidity();
-                    if (!agreementCheckbox.checked) {
-                        showMessage('Please agree that the information is correct.');
-                    }
+                } catch (error) {
+                    console.error('Error creating PDF:', error);
+                    showMessage('An error occurred while generating the PDF. Please check your inputs.', false);
+                } finally {
+                    toggleLoading(downloadBtn, downloadText, downloadSpinner, false);
                 }
             });
 
+            /**
+             * Handles the application submission process, including form validation and loading state.
+             * This is a placeholder as no backend is available.
+             */
+            sendBtn.addEventListener('click', async () => {
+                toggleLoading(sendBtn, sendText, sendSpinner, true);
+                try {
+                    // Check form validity and agreement
+                    if (!form.checkValidity()) {
+                        form.reportValidity();
+                        showMessage('Please fill out all required fields.', false);
+                        return;
+                    }
+                    if (!agreementCheckbox.checked) {
+                        showMessage('Please agree that the information is correct.', false);
+                        return;
+                    }
+
+                    // Get form data and simulate a successful submission
+                    const formData = getFormData();
+                    console.log('Form data to be sent:', formData);
+
+                    await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate network request delay
+
+                    // In a real-world scenario, you would send this data to a server here.
+                    // Example: await fetch('your-api-endpoint', { method: 'POST', body: JSON.stringify(formData) });
+                    
+                    showMessage('Your application has been sent successfully! We will contact you soon.', true);
+
+                } catch (error) {
+                    console.error('Submission failed:', error);
+                    showMessage('Submission failed. Please try again later.', false);
+                } finally {
+                    toggleLoading(sendBtn, sendText, sendSpinner, false);
+                }
+            });
         })();
     </script>
 </body>
