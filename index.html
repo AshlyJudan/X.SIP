@@ -101,6 +101,18 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+        /* New styles for fade-on-scroll animation */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -125,8 +137,8 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative py-20 px-4 sm:px-6 lg:px-8 shadow-md rounded-lg mx-4 mt-8 bg-gray-100">
+    <!-- Hero Section - this will be visible on page load, so we give it the is-visible class directly -->
+    <section class="relative py-20 px-4 sm:px-6 lg:px-8 shadow-md rounded-lg mx-4 mt-8 bg-gray-100 fade-in-section is-visible">
         <div class="container mx-auto text-center">
             <!-- Adjusted text sizes for responsiveness -->
             <h2 class="text-3xl sm:text-5xl font-extrabold text-gray-900" style="color: #D1AF60;">Empowering Your Design Future</h2>
@@ -139,8 +151,8 @@
         </div>
     </section>
 
-    <!-- About Us Section -->
-    <section id="about" class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+    <!-- About Us Section - now with the fade-in class -->
+    <section id="about" class="py-16 px-4 sm:px-6 lg:px-8 bg-white fade-in-section">
         <div class="container mx-auto text-center">
             <!-- Adjusted text sizes for responsiveness -->
             <h3 class="text-3xl sm:text-4xl font-bold text-gray-900" style="color: #D1AF60;">About Surabhi Pytha Academy</h3>
@@ -163,8 +175,8 @@
         </div>
     </section>
 
-    <!-- Courses Section -->
-    <section id="courses" class="bg-gray-100 py-16 px-4 sm:px-6 lg:px-8 rounded-lg mx-4">
+    <!-- Courses Section - now with the fade-in class -->
+    <section id="courses" class="bg-gray-100 py-16 px-4 sm:px-6 lg:px-8 rounded-lg mx-4 fade-in-section">
         <div class="container mx-auto text-center">
             <!-- Adjusted text sizes for responsiveness -->
             <h3 class="text-3xl sm:text-4xl font-bold text-gray-900" style="color: #D1AF60;">Our Core Courses</h3>
@@ -191,7 +203,7 @@
                     </ul>
                     <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mt-auto">
                         <a href="pytha-modeller-pack.html" class="inline-block bg-[#D1AF60] hover:bg-[#B5944B] text-white font-bold py-2 px-6 rounded-full shadow-md transition duration-300">Learn More</a>
-                        <a href="application-form.html?course=Pytha Modeller Pack (Advanced)" target="_blank" class="inline-block bg-[#D1AF60] hover:bg-[#B5944B] text-white font-bold py-2 px-6 rounded-full shadow-md transition duration-300">Apply Now</a>
+                        <a href="application-form.html?course=Pytha Modeller Pack (Limited)" target="_blank" class="inline-block bg-[#D1AF60] hover:bg-[#B5944B] text-white font-bold py-2 px-6 rounded-full shadow-md transition duration-300">Apply Now</a>
                     </div>
                 </div>
 
@@ -214,8 +226,8 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-100">
+    <!-- Contact Section - now with the fade-in class -->
+    <section id="contact" class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-100 fade-in-section">
         <div class="container mx-auto text-center">
             <!-- Adjusted text sizes for responsiveness -->
             <h3 class="text-3xl sm:text-4xl font-bold text-gray-900" style="color: #D1AF60;">Get in Touch</h3>
@@ -251,7 +263,7 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Custom Modal UI for alerts, replacing alert() -->
     <div id="myModal" class="modal">
         <div class="modal-content">
@@ -260,10 +272,28 @@
         </div>
     </div>
 
-    <!-- Footer Section -->
-    <footer class="bg-black text-white py-8 px-4 sm:px-6 lg:px-8 mt-12 rounded-t-lg">
+    <!-- Footer Section - now with the social media links -->
+    <footer class="bg-black text-white py-8 px-4 sm:px-6 lg:px-8 mt-12 rounded-t-lg fade-in-section">
         <div class="container mx-auto text-center">
             <p>&copy; 2025 Surabhi Pytha Academy. All rights reserved.</p>
+            <!-- Social Media Links -->
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="https://www.instagram.com/surabhi_pytha_academy/" target="_blank" class="hover:text-[#B5944B] transition duration-300">
+                    <!-- Instagram SVG Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <a href="https://www.youtube.com/@SURABHIPYTHAACADEMY" target="_blank" class="hover:text-[#B5944B] transition duration-300">
+                    <!-- YouTube SVG Icon (fixed aspect ratio and no color) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-youtube">
+                        <path d="M22.54 6.42a2.84 2.84 0 0 0-2-2C19.46 4 12 4 12 4s-7.46 0-8.54.42a2.84 2.84 0 0 0-2 2C1 7.4 1 12 1 12s0 4.6.46 5.58a2.84 2.84 0 0 0 2 2C4.54 20 12 20 12 20s7.46 0 8.54-.42a2.84 2.84 0 0 0 2-2C23 16.6 23 12 23 12s0-4.6-.46-5.58z" />
+                        <polygon points="10 15 15 12 10 9 10 15" />
+                    </svg>
+                </a>
+            </div>
             <div class="flex justify-center space-x-6 mt-4">
                 <a href="#" class="hover:text-[#B5944B] transition duration-300">Privacy Policy</a>
                 <a href="#" class="hover:text-[#B5944B] transition duration-300">Terms of Service</a>
@@ -287,7 +317,7 @@
         });
 
         // This script block handles the header canvas animation and the new interactive shapes
-        window.onload = function() {
+        document.addEventListener('DOMContentLoaded', () => {
             // --- Header Sketch Animation ---
             const canvas = document.getElementById('logoCanvas');
             const ctx = canvas.getContext('2d');
@@ -364,7 +394,6 @@
                 });
                 requestAnimationFrame(animateHeaderCanvas);
             }
-            animateHeaderCanvas();
 
             // --- New Interactive Shapes Logic ---
             const shapeAnimationContainer = document.getElementById('shape-animation-container');
@@ -412,8 +441,8 @@
                 } else if (shape.type === 'triangle') {
                     const h = shape.size * (Math.sqrt(3) / 2);
                     shapeCtx.moveTo(shape.x, shape.y - h / 2);
-                    shapeCtx.lineTo(shape.x - shape.size / 2, shape.y + h / 2);
-                    shapeCtx.lineTo(shape.x + shape.size / 2, shape.y + h / 2);
+                    ctx.lineTo(shape.x - shape.size / 2, shape.y + h / 2);
+                    ctx.lineTo(shape.x + shape.size / 2, shape.y + h / 2);
                     shapeCtx.closePath();
                     shapeCtx.fill();
                 } else if (shape.type === 'circle') {
@@ -467,7 +496,7 @@
 
                     // Update position
                     shape.x += shape.vx;
-                    shape.y += shape.y;
+                    shape.y += shape.vy; // Corrected typo here
 
                     // Boundary collision detection and bounce
                     const size = shape.size / 2;
@@ -502,10 +531,11 @@
             // Handle window resizing
             window.addEventListener('resize', resizeCanvas);
             
-            // Initial setup
+            // Initial setup and animation start
             resizeCanvas();
             animateShapes();
-        };
+            animateHeaderCanvas(); // Call to start the header animation
+        });
 
         // --- Custom Modal Functions ---
         const modal = document.getElementById('myModal');
@@ -568,6 +598,30 @@
 
             // Reset the form after successfully opening the link
             contactForm.reset();
+        });
+
+        // --- New Fade-on-Scroll Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.fade-in-section');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                // The root is the viewport by default
+                // threshold of 0.1 means the callback will fire as soon as 10% of the target is visible
+                threshold: 0.1
+            });
+
+            sections.forEach(section => {
+                // We only observe sections that are not already visible
+                if (!section.classList.contains('is-visible')) {
+                    observer.observe(section);
+                }
+            });
         });
     </script>
 </body>
